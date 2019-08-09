@@ -169,6 +169,7 @@ def get_vectorized_gym_env(base_env, gym_env_name, featurize_fn=None, **kwargs):
             gym_env.custom_init(base_env, featurize_fn=featurize_fn, baselines=True)
         return gym_env
     vectorized_gym_env = RewardShapingEnv(SubprocVecEnv([gym_env_fn] * kwargs["sim_threads"]))
+    vectorized_gym_env.base_env = base_env
     return vectorized_gym_env
 
 def get_pbt_agent_from_config(save_dir, sim_threads, seed, agent_idx=0, best=False):

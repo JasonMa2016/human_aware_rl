@@ -19,6 +19,7 @@ from overcooked_ai_py.agents.benchmarking import AgentEvaluator
 from overcooked_ai_py.planning.planners import NO_COUNTERS_PARAMS, MediumLevelPlanner
 from overcooked_ai_py.mdp.overcooked_env import OvercookedEnv
 from overcooked_ai_py.mdp.overcooked_mdp import OvercookedGridworld
+from overcooked_ai_py.mdp.layout_generator import LayoutGenerator
 
 from human_aware_rl.baselines_utils import get_vectorized_gym_env, create_model, update_model, save_baselines_model, load_baselines_model, get_agent_from_saved_model
 from human_aware_rl.utils import create_dir_if_not_exists, reset_tf, delete_dir_if_exists, set_global_seed
@@ -164,10 +165,9 @@ def my_config():
 
     # For non fixed MDPs
     mdp_generation_params = {
-        "padded_mdp_shape": (11, 7),
-        "mdp_shape_fn": ([5, 11], [5, 7]),
-        "prop_empty_fn": [0.6, 1],
-        "prop_feats_fn": [0, 0.6]
+        "size_bounds": ([5, 6], [5, 6]),
+        "prop_empty": [0.6, 1],
+        "prop_feats": [0, 0.6]
     }
 
     # Approximate info
@@ -232,8 +232,14 @@ def save_ppo_model(model, save_folder):
         }
     )
 
-def configure_other_agent(params, gym_env, mlp, mdp):
+def configure_other_agent(params, gym_env):
+    if params["OTHER_AGENT_TYPE"] != "sp":
+        assert gym_env.base_env.variable_mdp is False
+
+    mdp = gym_env.base_env.mdp
     if params["OTHER_AGENT_TYPE"] == "hm":
+        mlp = MediumLevelPlanner.from_pickle_or_compute(mdp, NO_COUNTERS_PARAMS, force_compute=True)
+        assert mlp.mdp == mdp
         hl_br, hl_temp, ll_br, ll_temp = params["HM_PARAMS"]
         agent = GreedyHumanModel(mlp, hl_boltzmann_rational=hl_br, hl_temp=hl_temp, ll_boltzmann_rational=ll_br, ll_temp=ll_temp)
         gym_env.use_action_method = True
@@ -265,10 +271,11 @@ def configure_other_agent(params, gym_env, mlp, mdp):
     else:
         raise ValueError("unknown type of agent to match with")
         
-    if not params["OTHER_AGENT_TYPE"] == "sp":
-        assert mlp.mdp == mdp
-        agent.set_mdp(mdp)
-        gym_env.other_agent = agent
+    if params["OTHER_AGENT_TYPE"] == "sp":
+        return
+
+    agent.set_mdp(mdp)
+    gym_env.other_agent = agent
 
 def load_training_data(run_name, seeds=None):
     run_dir = PPO_DATA_DIR + run_name + "/"
@@ -364,19 +371,20 @@ def ppo_run(params):
         print("Creating env with params", params)
         # Configure mdp
         
-        mdp = OvercookedGridworld.from_layout_name(**params["mdp_params"])
-        env = OvercookedEnv(mdp, **params["env_params"])
-        mlp = MediumLevelPlanner.from_pickle_or_compute(mdp, NO_COUNTERS_PARAMS, force_compute=True) 
+        mdp_params = params["mdp_params"]
+        mdp_gen_params = params["mdp_generation_params"]
+        mdp_fn = LayoutGenerator.mdp_gen_fn_from_dict(mdp_params=mdp_params, **mdp_gen_params)
+        env = OvercookedEnv(mdp=mdp_fn, **params["env_params"])
 
         # Configure gym env
         gym_env = get_vectorized_gym_env(
-            env, 'Overcooked-v0', featurize_fn=lambda x: mdp.lossless_state_encoding(x), **params
+            env, 'Overcooked-v0', featurize_fn=lambda mdp, x: mdp.lossless_state_encoding(x), **params
         )
         gym_env.self_play_randomization = 0 if params["SELF_PLAY_HORIZON"] is None else 1
         gym_env.trajectory_sp = params["TRAJECTORY_SELF_PLAY"]
-        gym_env.update_reward_shaping_param(1 if params["mdp_params"]["rew_shaping_params"] != 0 else 0)
+        gym_env.update_reward_shaping_param(1 if mdp_params["rew_shaping_params"] != 0 else 0)
 
-        configure_other_agent(params, gym_env, mlp, mdp)
+        configure_other_agent(params, gym_env)
 
         # Create model
         with tf.device('/device:GPU:{}'.format(params["GPU_ID"])):
