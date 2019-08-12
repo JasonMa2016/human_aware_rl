@@ -128,6 +128,9 @@ def my_config():
     # Recommended to keep to true
     TRAJECTORY_SELF_PLAY = True
 
+    # Track running statistics in ray.tune
+    TRACK_TUNE = False
+
 
     ##################
     # NETWORK PARAMS #
@@ -216,6 +219,7 @@ def my_config():
         "SAVE_BEST_THRESH": SAVE_BEST_THRESH,
         "TRAJECTORY_SELF_PLAY": TRAJECTORY_SELF_PLAY,
         "VIZ_FREQUENCY": VIZ_FREQUENCY,
+        "TRACK_TUNE": TRACK_TUNE,
         "grad_updates_per_agent": GRAD_UPDATES_PER_AGENT
     }
 
@@ -342,7 +346,6 @@ def plot_ppo_run(name, sparse=False, limit=None, print_config=False, seeds=None,
         plt.legend()
 
 @ex.automain
-# @profile
 def ppo_run(params):
 
     # from sys import getsizeof
@@ -354,7 +357,7 @@ def ppo_run(params):
     save_pickle(params, params["SAVE_DIR"] + "config")
 
     #############
-    # pbt SETUP #
+    # ppo setup #
     #############
 
     train_infos = []
@@ -375,6 +378,10 @@ def ppo_run(params):
         mdp_gen_params = params["mdp_generation_params"]
         mdp_fn = LayoutGenerator.mdp_gen_fn_from_dict(mdp_params=mdp_params, **mdp_gen_params)
         env = OvercookedEnv(mdp=mdp_fn, **params["env_params"])
+
+        for _ in range(5):
+            print(env)
+            env.reset()
 
         # Configure gym env
         gym_env = get_vectorized_gym_env(
