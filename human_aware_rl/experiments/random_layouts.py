@@ -33,7 +33,7 @@ def my_config():
     # Tune Params #
     ###############
 
-    LR = (1e-5, 5e-3)
+    LR = (1e-5, 1e-3)
     GAMMA = (0.95, 1)
     LAM = (0.95, 1)
     MAX_GRAD_NORM = (0.001, 1)
@@ -88,7 +88,7 @@ def hyperparam_run(params):
         name="hyperparam_sweep" + time.strftime('%Y_%m_%d-%H_%M_%S'),
         config=search_space,
         scheduler=scheduler,
-        num_samples=20,
+        num_samples=50,
         resources_per_trial={"cpu": 16, "gpu": 1},
         local_dir='data/tune/'
     )
