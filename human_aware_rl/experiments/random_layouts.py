@@ -1,3 +1,10 @@
+import time
+import numpy as np
+from ray import tune
+from sacred import Experiment
+
+ex = Experiment('HyperparamSweep')
+
 from overcooked_ai_py.utils import load_pickle, save_pickle
 
 from human_aware_rl.utils import reset_tf
@@ -5,47 +12,69 @@ from human_aware_rl.ppo.ppo import ex as ex_ppo
 from human_aware_rl.imitation.behavioural_cloning import get_bc_agent_from_saved
 from human_aware_rl.experiments.bc_experiments import BEST_BC_MODELS_PATH
 
+# PARAMS
+@ex.config
+def my_config():
 
-from ray import tune
-import time
-import numpy as np
-from human_aware_rl.ppo.ppo import ex as ex_ppo
+    ##############
+    # Run Params #
+    ##############
 
-# def fun(lr, grl):
-#     def boi(t):
-#         return lr * 10 + 0.1 * t + grl
-#     return boi
+    LOCAL_TESTING = False
+    layout_name = None
+    OTHER_AGENT_TYPE = 'sp'
+    mdp_generation_params={'size_bounds': ([5, 5], [4, 4]),'prop_empty': [0.99, 1],'prop_feats': [0, 0.6]}
+    PPO_RUN_TOT_TIMESTEPS=1e7 if not LOCAL_TESTING else 10000
+    REW_SHAPING_HORIZON=0
+    EX_NAME = None
 
-# def train_mnist(config):
-#     optimizer = fun(lr=config["lr"], grl=config["grl"])
-#     for i in range(20):
-#         time.sleep(np.random.uniform(0, 2))
-#         acc = optimizer(i)
-#         tune.track.log(mean_accuracy=acc)
+    
+    ###############
+    # Tune Params #
+    ###############
+
+    LR = (1e-5, 5e-3)
+    GAMMA = (0.95, 1)
+    LAM = (0.95, 1)
+    MAX_GRAD_NORM = (0.001, 1)
+    CLIPPING = (0.001, 0.1)
+
+    uniform_tune_params = [
+        "LR", 
+        "GAMMA", 
+        "LAM",
+        "MAX_GRAD_NORM",
+        "CLIPPING"
+    ]
+    
+    params = dict(locals())
 
 def train_ppo(config):
-    lr = config["lr"]
-    run = ex_ppo.run(config_updates={'LOCAL_TESTING': True, 'layout_name': 'simple', 'OTHER_AGENT_TYPE': 'sp', 'LR': lr, 'PPO_RUN_TOT_TIMESTEPS':5e5 })
-    # train_info = run.result[0]
+    from human_aware_rl.ppo.ppo import ex as ex_ppo, ppo_run, my_config
 
-search_space = {
-    "lr": tune.uniform(0, 1)
-}
+    tune_config_updates = {'TRACK_TUNE':True}
+    tune_config_updates.update(config)
 
-# searcher = tune.suggest.BasicVariantGenerator()
-# searcher.add_configurations()
+    run = ex_ppo.run(config_updates=tune_config_updates)
+    train_info = run.result[0]
 
-analysis = tune.run(
-    train_ppo, 
-    name="example",
-    config=search_space,
-    scheduler=tune.schedulers.AsyncHyperBandScheduler(metric="mean_accuracy", grace_period=10, mode="max"),
-    num_samples=2
-)
+@ex.automain
+def hyperparam_run(params):
+    
+    search_space = {}
+    for k, v in params.items():
+        if k in params["uniform_tune_params"]:
+            search_space[k] = tune.uniform(*v)
+        elif k != "uniform_tune_params":
+            search_space[k] = v
 
+    analysis = tune.run(
+        train_ppo,
+        name="hyperparam_sweep" + time.strftime('%Y_%m_%d-%H_%M_%S'),
+        config=search_space,
+        scheduler=tune.schedulers.AsyncHyperBandScheduler(metric="sparse_reward", grace_period=10, mode="max"),
+        num_samples=20,
+        local_dir='data/tune/'
+    )
 
-# Just making sure seeding is working correctly and not changing actual outputs
-
-
-# Uncomment to make current output standard output to check against
-# save_pickle(train_info, 'data/testing/ppo_sp_train_info')
+    return analysis
