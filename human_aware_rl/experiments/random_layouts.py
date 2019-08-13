@@ -68,12 +68,20 @@ def hyperparam_run(params):
         elif k != "uniform_tune_params":
             search_space[k] = v
 
+    scheduler = tune.schedulers.AsyncHyperBandScheduler(
+        metric="sparse_reward", 
+        grace_period=50,
+        mode="max",
+        max_t=5000
+    )
+
     analysis = tune.run(
         train_ppo,
         name="hyperparam_sweep" + time.strftime('%Y_%m_%d-%H_%M_%S'),
         config=search_space,
-        scheduler=tune.schedulers.AsyncHyperBandScheduler(metric="sparse_reward", grace_period=10, mode="max"),
+        scheduler=scheduler,
         num_samples=20,
+        resources_per_trial={"cpu": 30, "gpu": 1},
         local_dir='data/tune/'
     )
 
