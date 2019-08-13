@@ -39,12 +39,15 @@ def my_config():
     MAX_GRAD_NORM = (0.001, 1)
     CLIPPING = (0.001, 0.1)
 
-    uniform_tune_params = [
-        "LR", 
+    uniform_tune_params = [ 
         "GAMMA", 
         "LAM",
         "MAX_GRAD_NORM",
         "CLIPPING"
+    ]
+    
+    log_uniform_tune_params = [
+        "LR"
     ]
     
     params = dict(locals())
@@ -58,6 +61,9 @@ def train_ppo(config):
     run = ex_ppo.run(config_updates=tune_config_updates)
     train_info = run.result[0]
 
+def loguniform(low=0, high=1, size=None):
+    return np.exp(np.random.uniform(np.log(low), np.log(high), size))
+
 @ex.automain
 def hyperparam_run(params):
     
@@ -65,7 +71,9 @@ def hyperparam_run(params):
     for k, v in params.items():
         if k in params["uniform_tune_params"]:
             search_space[k] = tune.uniform(*v)
-        elif k != "uniform_tune_params":
+        elif k in params["log_uniform_tune_params"]:
+            search_space[k] = loguniform(*v)
+        elif k not in ["uniform_tune_params", "log_uniform_tune_params"]:
             search_space[k] = v
 
     scheduler = tune.schedulers.AsyncHyperBandScheduler(
