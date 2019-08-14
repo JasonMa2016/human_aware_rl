@@ -63,6 +63,8 @@ def train_ppo(config):
     tune_config_updates = {'TRACK_TUNE':True}
     tune_config_updates.update(config)
 
+    tune_config_updates["SEEDS"] = list(tune_config_updates["SEEDS"]) #HACK
+
     run = ex_ppo.run(config_updates=tune_config_updates)
     train_info = run.result[0]
 
