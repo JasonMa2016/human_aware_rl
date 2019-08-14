@@ -38,12 +38,17 @@ def my_config():
     LAM = (0.95, 1)
     MAX_GRAD_NORM = (0.001, 1)
     CLIPPING = (0.001, 0.1)
+    SEEDS = (0, 10000)
 
     uniform_tune_params = [ 
         "GAMMA", 
         "LAM",
         "MAX_GRAD_NORM",
         "CLIPPING"
+    ]
+
+    randint_tune_params = [
+        "SEEDS"
     ]
     
     log_uniform_tune_params = [
@@ -73,10 +78,12 @@ def hyperparam_run(params):
     for k, v in params.items():
         if k in params["uniform_tune_params"]:
             search_space[k] = tune.uniform(*v)
+        elif k in params["randint_tune_params"]:
+            search_space[k] = tune.randint(*v)
         elif k in params["log_uniform_tune_params"]:
             _v = v # For some reason this is necessary
             search_space[k] = tune.sample_from(lambda spec: loguniform(*_v))
-        elif k not in ["uniform_tune_params", "log_uniform_tune_params"]:
+        elif k not in ["uniform_tune_params", "log_uniform_tune_params", "randint_tune_params"]:
             search_space[k] = v
 
     scheduler = tune.schedulers.AsyncHyperBandScheduler(
