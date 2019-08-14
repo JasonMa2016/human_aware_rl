@@ -72,7 +72,7 @@ def hyperparam_run(params):
         if k in params["uniform_tune_params"]:
             search_space[k] = tune.uniform(*v)
         elif k in params["log_uniform_tune_params"]:
-            search_space[k] = loguniform(*v)
+            search_space[k] = tune.sample_from(lambda spec: loguniform(*v))
         elif k not in ["uniform_tune_params", "log_uniform_tune_params"]:
             search_space[k] = v
 
