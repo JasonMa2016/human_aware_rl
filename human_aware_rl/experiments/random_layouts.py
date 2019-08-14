@@ -62,17 +62,20 @@ def train_ppo(config):
     train_info = run.result[0]
 
 def loguniform(low=0, high=1, size=None):
-    return np.exp(np.random.uniform(np.log(low), np.log(high), size))
+    chosen_lr = np.exp(np.random.uniform(np.log(low), np.log(high), size))
+    print(chosen_lr)
+    return chosen_lr
 
 @ex.automain
 def hyperparam_run(params):
-    
+
     search_space = {}
     for k, v in params.items():
         if k in params["uniform_tune_params"]:
             search_space[k] = tune.uniform(*v)
         elif k in params["log_uniform_tune_params"]:
-            search_space[k] = tune.sample_from(lambda spec: loguniform(*v))
+            _v = v # For some reason this is necessary
+            search_space[k] = tune.sample_from(lambda spec: loguniform(*_v))
         elif k not in ["uniform_tune_params", "log_uniform_tune_params"]:
             search_space[k] = v
 
@@ -88,7 +91,7 @@ def hyperparam_run(params):
         name="hyperparam_sweep" + time.strftime('%Y_%m_%d-%H_%M_%S'),
         config=search_space,
         scheduler=scheduler,
-        num_samples=50,
+        num_samples=150,
         resources_per_trial={"cpu": 16, "gpu": 1},
         local_dir='data/tune/'
     )
