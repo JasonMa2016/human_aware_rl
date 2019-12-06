@@ -112,20 +112,20 @@ venv.bak/
 *.png
 
 # Models and run data
-.temp_best_model
-checkpoint/
-data/ppo_runs/
-data/ftw_runs/
-data/pbt_runs/
-data/agent_runs/
-data/bc_runs/
-data/chosen_layouts/
-data/expert_agent/
-data/ftw_exp/
-data/pbt_exp/
-data/gail_runs/
-data/joint_ppo_runs/
-data/ppo_exp/
+# .temp_best_model
+# checkpoint/
+# data/ppo_runs/
+# data/ftw_runs/
+# data/pbt_runs/
+# data/agent_runs/
+# data/bc_runs/
+# data/chosen_layouts/
+# data/expert_agent/
+# data/ftw_exp/
+# data/pbt_exp/
+# data/gail_runs/
+# data/joint_ppo_runs/
+# data/ppo_exp/
 
 # Other files
 transfer_agent.sh
