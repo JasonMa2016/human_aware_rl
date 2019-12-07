@@ -1,7 +1,7 @@
 import copy
 import numpy as np
 
-from overcooked_ai_py.utils import save_pickle, mean_and_std_err
+from overcooked_ai_py.utils import load_pickle, save_pickle, mean_and_std_err
 from overcooked_ai_py.agents.benchmarking import AgentEvaluator
 from overcooked_ai_py.agents.agent import AgentPair
 
@@ -19,7 +19,7 @@ def train_bc_agent_from_hh_data(layout_name, agent_name, num_epochs, lr, adam_ep
 
     bc_params = copy.deepcopy(DEFAULT_BC_PARAMS)
     bc_params["data_params"]['train_mdps'] = [layout_name]
-    bc_params["data_params"]['data_path'] = "data/human/clean_{}_trials.pkl".format(model)
+    bc_params["data_params"]['data_path'] = "data/human/anonymized/clean_{}_trials.pkl".format(model)
     bc_params["mdp_params"]['layout_name'] = layout_name
     bc_params["mdp_params"]['start_order_list'] = None
 
@@ -96,26 +96,26 @@ def run_all_bc_experiments():
     params_simple = {"layout_name": "simple", "num_epochs": 50, "lr": 1e-3, "adam_eps":1e-8}
     params_unident = {"layout_name": "unident_s", "num_epochs": 60, "lr": 1e-3, "adam_eps":1e-8}
     params_random1 = {"layout_name": "random1", "num_epochs": 60, "lr": 1e-3, "adam_eps":1e-8}
-    params_random0 = {"layout_name": "random0", "num_epochs": 45, "lr": 1e-3, "adam_eps":1e-8}
-    params_random3 = {"layout_name": "random3", "num_epochs": 55, "lr": 1e-3, "adam_eps":1e-8}
+    params_random0 = {"layout_name": "random0", "num_epochs": 50, "lr": 1e-3, "adam_eps":1e-8}
+    params_random3 = {"layout_name": "random3", "num_epochs": 60, "lr": 1e-3, "adam_eps":1e-8}
 
     # params_unident = {"layout_name": "unident_s", "num_epochs": 120, "lr": 1e-3, "adam_eps":1e-8}
     # params_simple = {"layout_name": "simple", "num_epochs": 100, "lr": 1e-3, "adam_eps":1e-8}
     # params_random1 = {"layout_name": "random1", "num_epochs": 120, "lr": 1e-3, "adam_eps":1e-8}
     # params_random0 = {"layout_name": "random0", "num_epochs": 90, "lr": 1e-3, "adam_eps":1e-8}
     # params_random3 = {"layout_name": "random3", "num_epochs": 110, "lr": 1e-3, "adam_eps":1e-8}
-
+    train_params = [params_random0, params_random3]	
     all_params = [params_simple, params_random1, params_unident, params_random0, params_random3]
-    train_bc_models(all_params, seeds)
+    # train_bc_models(train_params, seeds)
 
     # Evaluate BC models
     set_global_seed(64)
 
     num_rounds = 100
-    bc_models_evaluation = evaluate_all_bc_models(all_params, num_rounds, num_seeds)
-    save_pickle(bc_models_evaluation, BC_MODELS_EVALUATION_PATH)
-    print("All BC models evaluation: ", bc_models_evaluation)
-
+    # bc_models_evaluation = evaluate_all_bc_models(all_params, num_rounds, num_seeds)
+    # save_pickle(bc_models_evaluation, BC_MODELS_EVALUATION_PATH)
+    # print("All BC models evaluation: ", bc_models_evaluation)
+    bc_models_evaluation = load_pickle(BC_MODELS_EVALUATION_PATH)	
     # These models have been manually selected to more or less match in performance,
     # (test BC model should be a bit better than the train BC model)
 
@@ -132,7 +132,7 @@ def run_all_bc_experiments():
                     current_best_id = seed
             if layout not in selected_models:
                 selected_models[layout] = []
-            selected_models.append(current_best_id)
+            selected_models[layout].append(current_best_id)
 
     # selected_models = {
     #     "simple": [0, 1],
@@ -156,13 +156,15 @@ if __name__ == '__main__':
 # Automatic selection of best BC models. Caused imbalances that made interpretation of results more difficult, 
 # better to select manually non-best ones.
 
-# def select_bc_models(bc_models_evaluation, num_rounds, num_seeds):
-#     best_bc_model_paths = { "train": {}, "test": {} }
+	def select_bc_models(bc_models_evaluation, num_rounds, num_seeds):
+     best_bc_model_paths = { "train": {}, "test": {} }
 
-#     for layout_name, layout_eval_dict in bc_models_evaluation.items():
-#         for model_type, seed_eval_dict in layout_eval_dict.items():
-#             best_seed = np.argmax([seed_eval_dict[i] for i in range(num_seeds)])
-#             best_bc_model_paths[model_type][layout_name] = "{}_bc_{}_seed{}".format(layout_name, model_type, best_seed)
+     for layout_name, layout_eval_dict in bc_models_evaluation.items():
+         for model_type, seed_eval_dict in layout_eval_dict.items():
+             	best_seed = np.argmax([seed_eval_dict[i] for i in range(num_seeds)])
+        	best_bc_model_paths[model_type][layout_name] = "{}_bc_{}_seed{}".format(layout_name, model_type, best_seed)
 
-#     save_pickle(best_bc_model_paths, BEST_BC_MODELS_PATH)
-#     return best_bc_model_paths
+     	save_pickle(best_bc_model_paths, BEST_BC_MODELS_PATH)
+     	return best_bc_model_paths
+
+	

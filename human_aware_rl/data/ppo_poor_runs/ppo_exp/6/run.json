@@ -1,0 +1,106 @@
+{
+  "artifacts": [],
+  "command": "ppo_run",
+  "experiment": {
+    "base_dir": "/home/ubuntu/human_aware_rl/human_aware_rl/ppo",
+    "dependencies": [
+      "gym==0.15.4",
+      "matplotlib==3.0.3",
+      "memory-profiler==0.55.0",
+      "numpy==1.15.1",
+      "sacred==0.7.4",
+      "seaborn==0.9.0",
+      "tensorflow-gpu==1.13.1"
+    ],
+    "mainfile": "ppo.py",
+    "name": "PPO",
+    "repositories": [
+      {
+        "commit": "0e2015db218d340f564cec310d50bac97b86b82b",
+        "dirty": true,
+        "url": "https://github.com/JasonMa2016/human_aware_rl.git"
+      }
+    ],
+    "sources": [
+      [
+        "ppo.py",
+        "_sources/ppo_0081ccb2c343b7b29c3c57028cd97a92.py"
+      ]
+    ]
+  },
+  "fail_trace": [
+    "Traceback (most recent call last):\n",
+    "  File \"/home/ubuntu/anaconda3/envs/harl/lib/python3.7/site-packages/sacred-0.7.4-py3.7.egg/sacred/config/captured_function.py\", line 46, in captured_function\n    result = wrapped(*args, **kwargs)\n",
+    "  File \"ppo/ppo.py\", line 393, in ppo_run\n    configure_other_agent(params, gym_env, mlp, mdp)\n",
+    "  File \"ppo/ppo.py\", line 245, in configure_other_agent\n    best_bc_model_paths = load_pickle(BEST_BC_MODELS_PATH)\n",
+    "  File \"/home/ubuntu/human_aware_rl/overcooked_ai/overcooked_ai_py/utils.py\", line 12, in load_pickle\n    with open(fix_filetype(filename, \".pickle\"), \"rb\") as f:\n",
+    "FileNotFoundError: [Errno 2] No such file or directory: 'data/bc_runs_poor/best_bc_model_paths.pickle'\n"
+  ],
+  "heartbeat": "2019-12-07T03:46:22.850540",
+  "host": {
+    "ENV": {},
+    "cpu": "Intel(R) Xeon(R) CPU E5-2686 v4 @ 2.30GHz",
+    "gpus": {
+      "driver_version": "418.87.01",
+      "gpus": [
+        {
+          "model": "Tesla V100-SXM2-16GB",
+          "persistence_mode": true,
+          "total_memory": 16130
+        }
+      ]
+    },
+    "hostname": "ip-172-31-39-76",
+    "os": [
+      "Linux",
+      "Linux-4.4.0-1099-aws-x86_64-with-debian-stretch-sid"
+    ],
+    "python_version": "3.7.5"
+  },
+  "meta": {
+    "command": "ppo_run",
+    "options": {
+      "--beat_interval": null,
+      "--capture": null,
+      "--comment": null,
+      "--debug": false,
+      "--enforce_clean": false,
+      "--file_storage": null,
+      "--force": false,
+      "--help": false,
+      "--loglevel": null,
+      "--mongo_db": null,
+      "--name": null,
+      "--pdb": false,
+      "--print_config": false,
+      "--priority": null,
+      "--queue": false,
+      "--sql": null,
+      "--tiny_db": null,
+      "--unobserved": false,
+      "COMMAND": null,
+      "UPDATE": [
+        "EX_NAME=ppo_bc_train_random0",
+        "layout_name=random0",
+        "REW_SHAPING_HORIZON=4e6",
+        "PPO_RUN_TOT_TIMESTEPS=9e6",
+        "LR=1.5e-3",
+        "GPU_ID=0",
+        "OTHER_AGENT_TYPE=bc_train",
+        "SEEDS=[9456, 1887, 5578, 5987,  516]",
+        "VF_COEF=0.1",
+        "MINIBATCHES=15",
+        "LR_ANNEALING=2",
+        "SELF_PLAY_HORIZON=None",
+        "TIMESTAMP_DIR=False"
+      ],
+      "help": false,
+      "with": true
+    }
+  },
+  "resources": [],
+  "result": null,
+  "start_time": "2019-12-07T03:46:03.578597",
+  "status": "FAILED",
+  "stop_time": "2019-12-07T03:46:22.852005"
+}
