@@ -1,7 +1,7 @@
 import os
 import io
 import re
-import git
+# import git
 import json
 import time
 import shutil
@@ -43,9 +43,9 @@ def num_tf_params():
             total_parameters += variable_parameters
     print(total_parameters)
 
-def get_current_commit_hash():
-    repo = git.Repo(search_parent_directories=True)
-    return repo.head.object.hexsha
+# def get_current_commit_hash():
+#     repo = git.Repo(search_parent_directories=True)
+#     return repo.head.object.hexsha
 
 def get_trailing_number(s):
     """

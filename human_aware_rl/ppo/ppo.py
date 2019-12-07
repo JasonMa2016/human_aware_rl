@@ -8,7 +8,7 @@ from sacred import Experiment
 from sacred.observers import FileStorageObserver
 from tensorflow.saved_model import simple_save
 
-PPO_DATA_DIR = 'data/ppo_runs/'
+PPO_DATA_DIR = 'data/ppo_poor_runs/'
 
 ex = Experiment('PPO')
 ex.observers.append(FileStorageObserver.create(PPO_DATA_DIR + 'ppo_exp'))
@@ -233,6 +233,9 @@ def save_ppo_model(model, save_folder):
     )
 
 def configure_other_agent(params, gym_env, mlp, mdp):
+    '''
+    For BC, it configures the best BC agent.
+    '''
     if params["OTHER_AGENT_TYPE"] == "hm":
         hl_br, hl_temp, ll_br, ll_temp = params["HM_PARAMS"]
         agent = GreedyHumanModel(mlp, hl_boltzmann_rational=hl_br, hl_temp=hl_temp, ll_boltzmann_rational=ll_br, ll_temp=ll_temp)
@@ -269,6 +272,20 @@ def configure_other_agent(params, gym_env, mlp, mdp):
         assert mlp.mdp == mdp
         agent.set_mdp(mdp)
         gym_env.other_agent = agent
+
+
+def configure_bc_agent(bc_model_path, gym_env, mlp, mdp):
+    '''
+    Configure the BC agent from its model path
+    '''
+
+    print("LOADING BC MODEL FROM: {}".format(bc_model_path))
+    agent, bc_params = get_bc_agent_from_saved(bc_model_path)
+    gym_env.use_action_method = True
+    assert mlp.mdp == mdp
+    agent.set_mdp(mdp)
+    gym_env.other_agent = agent
+
 
 def load_training_data(run_name, seeds=None):
     run_dir = PPO_DATA_DIR + run_name + "/"
@@ -308,6 +325,8 @@ def match_ppo_with_other_agent(save_dir, other_agent, n=1, display=False):
 
 def plot_ppo_run(name, sparse=False, limit=None, print_config=False, seeds=None, single=False):
     from collections import defaultdict
+
+    # load all training data from an environment
     train_infos, config = load_training_data(name, seeds)
     
     if print_config:

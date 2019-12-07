@@ -92,11 +92,18 @@ def run_all_bc_experiments():
     seeds = [5415, 2652, 6440, 1965, 6647]
     num_seeds = len(seeds)
 
-    params_unident = {"layout_name": "unident_s", "num_epochs": 120, "lr": 1e-3, "adam_eps":1e-8}
-    params_simple = {"layout_name": "simple", "num_epochs": 100, "lr": 1e-3, "adam_eps":1e-8}
-    params_random1 = {"layout_name": "random1", "num_epochs": 120, "lr": 1e-3, "adam_eps":1e-8}
-    params_random0 = {"layout_name": "random0", "num_epochs": 90, "lr": 1e-3, "adam_eps":1e-8}
-    params_random3 = {"layout_name": "random3", "num_epochs": 110, "lr": 1e-3, "adam_eps":1e-8}
+
+    params_simple = {"layout_name": "simple", "num_epochs": 50, "lr": 1e-3, "adam_eps":1e-8}
+    params_unident = {"layout_name": "unident_s", "num_epochs": 60, "lr": 1e-3, "adam_eps":1e-8}
+    params_random1 = {"layout_name": "random1", "num_epochs": 60, "lr": 1e-3, "adam_eps":1e-8}
+    params_random0 = {"layout_name": "random0", "num_epochs": 45, "lr": 1e-3, "adam_eps":1e-8}
+    params_random3 = {"layout_name": "random3", "num_epochs": 55, "lr": 1e-3, "adam_eps":1e-8}
+
+    # params_unident = {"layout_name": "unident_s", "num_epochs": 120, "lr": 1e-3, "adam_eps":1e-8}
+    # params_simple = {"layout_name": "simple", "num_epochs": 100, "lr": 1e-3, "adam_eps":1e-8}
+    # params_random1 = {"layout_name": "random1", "num_epochs": 120, "lr": 1e-3, "adam_eps":1e-8}
+    # params_random0 = {"layout_name": "random0", "num_epochs": 90, "lr": 1e-3, "adam_eps":1e-8}
+    # params_random3 = {"layout_name": "random3", "num_epochs": 110, "lr": 1e-3, "adam_eps":1e-8}
 
     all_params = [params_simple, params_random1, params_unident, params_random0, params_random3]
     train_bc_models(all_params, seeds)
@@ -111,13 +118,29 @@ def run_all_bc_experiments():
 
     # These models have been manually selected to more or less match in performance,
     # (test BC model should be a bit better than the train BC model)
-    selected_models = {
-        "simple": [0, 1],
-        "unident_s": [0, 0],
-        "random1": [4, 2],
-        "random0": [2, 1],
-        "random3": [3, 3]
-    }
+
+    selected_models = {}
+    for layout in bc_models_evaluation:
+        current_layout_evaluation = bc_models_evaluation[layout]
+        for mode in current_layout_evaluation:
+            current_layout_mode_evaluation = current_layout_evaluation[mode]
+            current_best_id = -1
+            current_best = 0
+            for seed in current_layout_mode_evaluation:
+                if current_layout_mode_evaluation[seed] > current_best:
+                    current_best = current_layout_mode_evaluation[seed]
+                    current_best_id = seed
+            if layout not in selected_models:
+                selected_models[layout] = []
+            selected_models.append(current_best_id)
+
+    # selected_models = {
+    #     "simple": [0, 1],
+    #     "unident_s": [0, 0],
+    #     "random1": [4, 2],
+    #     "random0": [2, 1],
+    #     "random3": [3, 3]
+    # }
 
     final_bc_model_paths = { "train": {}, "test": {} }
     for layout_name, seed_indices in selected_models.items():
