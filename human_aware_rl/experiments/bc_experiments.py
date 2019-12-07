@@ -151,7 +151,8 @@ def run_all_bc_experiments():
     best_bc_models_performance = evaluate_bc_models(final_bc_model_paths, num_rounds)
     save_pickle(best_bc_models_performance, BC_SAVE_DIR + "best_bc_models_performance")
     
-
+if __name__ == '__main__':
+    run_all_bc_experiments()
 # Automatic selection of best BC models. Caused imbalances that made interpretation of results more difficult, 
 # better to select manually non-best ones.
 
