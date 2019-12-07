@@ -87,6 +87,18 @@ def evaluate_bc_models(bc_model_paths, num_rounds):
     
     return best_bc_models_performance
 
+
+def select_bc_models(bc_models_evaluation, num_rounds, num_seeds):
+    best_bc_model_paths = { "train": {}, "test": {} }
+
+    for layout_name, layout_eval_dict in bc_models_evaluation.items():
+        for model_type, seed_eval_dict in layout_eval_dict.items():
+            best_seed = np.argmax([seed_eval_dict[i] for i in range(num_seeds)])
+            best_bc_model_paths[model_type][layout_name] = "{}_bc_{}_seed{}".format(layout_name, model_type, best_seed)
+    save_pickle(best_bc_model_paths, BEST_BC_MODELS_PATH)
+    return best_bc_model_paths
+
+
 def run_all_bc_experiments():
     # Train BC models
     seeds = [5415, 2652, 6440, 1965, 6647]
@@ -150,21 +162,15 @@ def run_all_bc_experiments():
 
     best_bc_models_performance = evaluate_bc_models(final_bc_model_paths, num_rounds)
     save_pickle(best_bc_models_performance, BC_SAVE_DIR + "best_bc_models_performance")
-    
+
 if __name__ == '__main__':
-    run_all_bc_experiments()
+    # run_all_bc_experiments()
+    best_bc_models_performance = load_pickle(BC_SAVE_DIR + "best_bc_models_performance")
+    select_bc_models(best_bc_models_performance, 100, 5)
+
 # Automatic selection of best BC models. Caused imbalances that made interpretation of results more difficult, 
 # better to select manually non-best ones.
 
-	def select_bc_models(bc_models_evaluation, num_rounds, num_seeds):
-     best_bc_model_paths = { "train": {}, "test": {} }
 
-     for layout_name, layout_eval_dict in bc_models_evaluation.items():
-         for model_type, seed_eval_dict in layout_eval_dict.items():
-             	best_seed = np.argmax([seed_eval_dict[i] for i in range(num_seeds)])
-        	best_bc_model_paths[model_type][layout_name] = "{}_bc_{}_seed{}".format(layout_name, model_type, best_seed)
-
-     	save_pickle(best_bc_model_paths, BEST_BC_MODELS_PATH)
-     	return best_bc_model_paths
 
 	
