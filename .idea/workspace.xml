@@ -3,15 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="cfff82c0-7032-4a90-8122-41a2a82ad4f3" name="Default Changelist" comment="">
       <change afterPath="$PROJECT_DIR$/overcooked_ai/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/human_aware_rl/NeurIPS Experiments and Visualizations.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/human_aware_rl/NeurIPS Experiments and Visualizations.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/human_aware_rl/Thesis.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/human_aware_rl/Thesis.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/human_aware_rl/data/pbt_runs/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/human_aware_rl/data/pbt_runs/pbt_models_performance.pickle" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/human_aware_rl/data/planning/p_bc_evaluation.pickle" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/human_aware_rl/evaluate.py" beforeDir="false" afterPath="$PROJECT_DIR$/human_aware_rl/evaluate.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/human_aware_rl/experiments/bc_experiments.py" beforeDir="false" afterPath="$PROJECT_DIR$/human_aware_rl/experiments/bc_experiments.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/human_aware_rl/imitation/behavioural_cloning.py" beforeDir="false" afterPath="$PROJECT_DIR$/human_aware_rl/imitation/behavioural_cloning.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/overcooked_ai" beforeDir="false" afterPath="$PROJECT_DIR$/overcooked_ai" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />

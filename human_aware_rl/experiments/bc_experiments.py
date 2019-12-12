@@ -118,15 +118,15 @@ def run_all_bc_experiments():
     # params_random3 = {"layout_name": "random3", "num_epochs": 110, "lr": 1e-3, "adam_eps":1e-8}
     train_params = [params_random0, params_random3]	
     all_params = [params_simple, params_random1, params_unident, params_random0, params_random3]
-    # train_bc_models(train_params, seeds)
+    train_bc_models(train_params, seeds)
 
     # Evaluate BC models
     set_global_seed(64)
 
     num_rounds = 100
-    # bc_models_evaluation = evaluate_all_bc_models(all_params, num_rounds, num_seeds)
-    # save_pickle(bc_models_evaluation, BC_MODELS_EVALUATION_PATH)
-    # print("All BC models evaluation: ", bc_models_evaluation)
+    bc_models_evaluation = evaluate_all_bc_models(all_params, num_rounds, num_seeds)
+    save_pickle(bc_models_evaluation, BC_MODELS_EVALUATION_PATH)
+    print("All BC models evaluation: ", bc_models_evaluation)
     bc_models_evaluation = load_pickle(BC_MODELS_EVALUATION_PATH)	
     # These models have been manually selected to more or less match in performance,
     # (test BC model should be a bit better than the train BC model)
