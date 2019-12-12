@@ -105,11 +105,11 @@ def run_all_bc_experiments():
     num_seeds = len(seeds)
 
 
-    params_simple = {"layout_name": "simple", "num_epochs": 50, "lr": 1e-3, "adam_eps":1e-8}
-    params_unident = {"layout_name": "unident_s", "num_epochs": 60, "lr": 1e-3, "adam_eps":1e-8}
-    params_random1 = {"layout_name": "random1", "num_epochs": 60, "lr": 1e-3, "adam_eps":1e-8}
-    params_random0 = {"layout_name": "random0", "num_epochs": 50, "lr": 1e-3, "adam_eps":1e-8}
-    params_random3 = {"layout_name": "random3", "num_epochs": 60, "lr": 1e-3, "adam_eps":1e-8}
+    params_simple = {"layout_name": "simple", "num_epochs": 30, "lr": 1e-3, "adam_eps":1e-8}
+    params_unident = {"layout_name": "unident_s", "num_epochs": 30, "lr": 1e-3, "adam_eps":1e-8}
+    params_random1 = {"layout_name": "random1", "num_epochs": 30, "lr": 1e-3, "adam_eps":1e-8}
+    params_random0 = {"layout_name": "random0", "num_epochs": 30, "lr": 1e-3, "adam_eps":1e-8}
+    params_random3 = {"layout_name": "random3", "num_epochs": 30, "lr": 1e-3, "adam_eps":1e-8}
 
     # params_unident = {"layout_name": "unident_s", "num_epochs": 120, "lr": 1e-3, "adam_eps":1e-8}
     # params_simple = {"layout_name": "simple", "num_epochs": 100, "lr": 1e-3, "adam_eps":1e-8}
@@ -164,8 +164,8 @@ def run_all_bc_experiments():
     save_pickle(best_bc_models_performance, BC_SAVE_DIR + "best_bc_models_performance")
 
 if __name__ == '__main__':
-    # run_all_bc_experiments()
-    # best_bc_models_performance = load_pickle(BC_SAVE_DIR + "best_bc_models_performance")
+    run_all_bc_experiments()
+    best_bc_models_performance = load_pickle(BC_SAVE_DIR + "best_bc_models_performance")
     bc_models_evaluation = load_pickle(BC_MODELS_EVALUATION_PATH)
     select_bc_models(bc_models_evaluation, 100, 5)
 

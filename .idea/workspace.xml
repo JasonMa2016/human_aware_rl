@@ -3,7 +3,15 @@
   <component name="ChangeListManager">
     <list default="true" id="cfff82c0-7032-4a90-8122-41a2a82ad4f3" name="Default Changelist" comment="">
       <change afterPath="$PROJECT_DIR$/overcooked_ai/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/human_aware_rl/NeurIPS Experiments and Visualizations.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/human_aware_rl/NeurIPS Experiments and Visualizations.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/human_aware_rl/Thesis.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/human_aware_rl/Thesis.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/human_aware_rl/data/pbt_runs/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/human_aware_rl/data/pbt_runs/pbt_models_performance.pickle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/human_aware_rl/data/planning/p_bc_evaluation.pickle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/human_aware_rl/evaluate.py" beforeDir="false" afterPath="$PROJECT_DIR$/human_aware_rl/evaluate.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/human_aware_rl/experiments/bc_experiments.py" beforeDir="false" afterPath="$PROJECT_DIR$/human_aware_rl/experiments/bc_experiments.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/human_aware_rl/imitation/behavioural_cloning.py" beforeDir="false" afterPath="$PROJECT_DIR$/human_aware_rl/imitation/behavioural_cloning.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/overcooked_ai" beforeDir="false" afterPath="$PROJECT_DIR$/overcooked_ai" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -41,12 +49,12 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="py" value="1351" />
+          <entry key="py" value="1369" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Python" value="1351" />
+          <entry key="Python" value="1369" />
         </counts>
       </usages-collector>
     </session>
@@ -56,8 +64,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/human_aware_rl/ppo/ppo.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="249">
-              <caret line="13" column="29" selection-start-line="13" selection-start-column="29" selection-end-line="13" selection-end-column="29" />
+            <state relative-caret-position="454">
+              <caret line="311" column="28" lean-forward="true" selection-start-line="311" selection-start-column="28" selection-end-line="311" selection-end-column="28" />
               <folding>
                 <element signature="e#0#29#0" expanded="true" />
                 <marker date="1575678900000" expanded="true" signature="9024:9268" ph="..." />
@@ -69,8 +77,11 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/human_aware_rl/experiments/ppo_bc_experiments.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1117">
-              <caret line="10" column="62" selection-start-line="10" selection-start-column="62" selection-end-line="10" selection-end-column="62" />
+            <state relative-caret-position="1859">
+              <caret line="105" column="20" selection-start-line="105" selection-start-column="20" selection-end-line="105" selection-end-column="20" />
+              <folding>
+                <element signature="e#0#18#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -78,11 +89,20 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/human_aware_rl/experiments/bc_experiments.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="726">
-              <caret line="153" column="26" lean-forward="true" selection-start-line="153" selection-start-column="26" selection-end-line="153" selection-end-column="26" />
+            <state relative-caret-position="625">
+              <caret line="165" column="26" lean-forward="true" selection-start-line="165" selection-start-column="26" selection-end-line="165" selection-end-column="26" />
               <folding>
                 <element signature="e#0#11#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/overcooked_ai/overcooked_ai_py/utils.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="57">
+              <caret line="5" selection-start-line="5" selection-end-line="5" />
             </state>
           </provider>
         </entry>
@@ -99,8 +119,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/human_aware_rl/imitation/behavioural_cloning.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="302">
-              <caret line="19" selection-start-line="19" selection-end-line="19" />
+            <state relative-caret-position="361">
+              <caret line="19" column="35" selection-start-line="19" selection-start-column="35" selection-end-line="19" selection-end-column="35" />
               <folding>
                 <element signature="e#0#10#0" expanded="true" />
               </folding>
@@ -111,8 +131,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/human_aware_rl/baselines_utils.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="278">
-              <caret line="319" column="32" selection-start-line="319" selection-start-column="32" selection-end-line="319" selection-end-column="32" />
+            <state relative-caret-position="420">
+              <caret line="23" column="20" selection-start-line="23" selection-start-column="20" selection-end-line="23" selection-end-column="20" />
               <folding>
                 <element signature="e#0#10#0" expanded="true" />
               </folding>
@@ -186,9 +206,9 @@
       <list>
         <option value="$PROJECT_DIR$/human_aware_rl/maml/maml.py" />
         <option value="$PROJECT_DIR$/overcooked_ai/__init__.py" />
-        <option value="$PROJECT_DIR$/human_aware_rl/imitation/behavioural_cloning.py" />
         <option value="$PROJECT_DIR$/human_aware_rl/ppo/ppo.py" />
         <option value="$PROJECT_DIR$/human_aware_rl/experiments/ppo_bc_experiments.sh" />
+        <option value="$PROJECT_DIR$/human_aware_rl/imitation/behavioural_cloning.py" />
         <option value="$PROJECT_DIR$/human_aware_rl/experiments/bc_experiments.py" />
       </list>
     </option>
@@ -225,8 +245,13 @@
             <path>
               <item name="human_aware_rl" type="b2602c69:ProjectViewProjectNode" />
               <item name="human_aware_rl" type="462c0819:PsiDirectoryNode" />
+              <item name="overcooked_ai" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="human_aware_rl" type="b2602c69:ProjectViewProjectNode" />
               <item name="human_aware_rl" type="462c0819:PsiDirectoryNode" />
-              <item name="experiments" type="462c0819:PsiDirectoryNode" />
+              <item name="overcooked_ai" type="462c0819:PsiDirectoryNode" />
+              <item name="overcooked_ai_py" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -312,21 +337,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/overcooked_ai/overcooked_ai_py/utils.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="95">
+        <state relative-caret-position="57">
           <caret line="5" selection-start-line="5" selection-end-line="5" />
-          <folding>
-            <element signature="e#0#41#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/overcooked_ai/overcooked_ai_py/mdp/overcooked_test.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-5202">
-          <folding>
-            <element signature="e#0#15#0" expanded="true" />
-          </folding>
-        </state>
+        <state relative-caret-position="-5202" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/human_aware_rl/data/ppo_runs/ppo_bc_train_simple/logs.txt">
@@ -339,24 +357,14 @@
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/overcooked_ai/overcooked_ai_py/planning/planners.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="e#0#20#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/human_aware_rl/experiments/ppo_hm_experiments.sh">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/overcooked_ai/overcooked_ai_py/agents/agent.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-6915">
-          <folding>
-            <element signature="e#0#16#0" expanded="true" />
-          </folding>
-        </state>
+        <state relative-caret-position="-6915" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/human_aware_rl/data/ppo_runs/ppo_exp/1/config.json">
@@ -367,39 +375,19 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/overcooked_ai/overcooked_ai_py/data/layouts/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/overcooked_ai/overcooked_ai_py/mdp/overcooked_mdp.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-7557">
-          <folding>
-            <element signature="e#0#22#0" expanded="true" />
-          </folding>
-        </state>
+        <state relative-caret-position="-7557" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/overcooked_ai/overcooked_ai_py/mdp/overcooked_env.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-5136">
-          <folding>
-            <element signature="e#0#10#0" expanded="true" />
-          </folding>
-        </state>
+        <state relative-caret-position="-5136" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/human_aware_rl/maml/maml.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2084">
-          <caret line="257" lean-forward="true" selection-start-line="257" selection-end-line="257" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/human_aware_rl/maml/maml.py" />
     <entry file="file://$PROJECT_DIR$/human_aware_rl/experiments/ppo_hm_experiments.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-633">
@@ -421,16 +409,6 @@
     <entry file="file://$PROJECT_DIR$/overcooked_ai/__init__.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/human_aware_rl/baselines_utils.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="278">
-          <caret line="319" column="32" selection-start-line="319" selection-start-column="32" selection-end-line="319" selection-end-column="32" />
-          <folding>
-            <element signature="e#0#10#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file:///Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/baselines/ppo2/ppo2.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="183">
@@ -444,27 +422,6 @@
     <entry file="file://$PROJECT_DIR$/human_aware_rl/experiments/graphing.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/human_aware_rl/imitation/behavioural_cloning.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="302">
-          <caret line="19" selection-start-line="19" selection-end-line="19" />
-          <folding>
-            <element signature="e#0#10#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/human_aware_rl/ppo/ppo.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="249">
-          <caret line="13" column="29" selection-start-line="13" selection-start-column="29" selection-end-line="13" selection-end-column="29" />
-          <folding>
-            <element signature="e#0#29#0" expanded="true" />
-            <marker date="1575678900000" expanded="true" signature="9024:9268" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/human_aware_rl/experiments/ppo_bc_experiments.sh">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="247">
@@ -472,17 +429,51 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/human_aware_rl/ppo/ppo.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="454">
+          <caret line="311" column="28" lean-forward="true" selection-start-line="311" selection-start-column="28" selection-end-line="311" selection-end-column="28" />
+          <folding>
+            <element signature="e#0#29#0" expanded="true" />
+            <marker date="1575678900000" expanded="true" signature="9024:9268" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/human_aware_rl/baselines_utils.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="420">
+          <caret line="23" column="20" selection-start-line="23" selection-start-column="20" selection-end-line="23" selection-end-column="20" />
+          <folding>
+            <element signature="e#0#10#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/human_aware_rl/experiments/ppo_bc_experiments.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1117">
-          <caret line="10" column="62" selection-start-line="10" selection-start-column="62" selection-end-line="10" selection-end-column="62" />
+        <state relative-caret-position="1859">
+          <caret line="105" column="20" selection-start-line="105" selection-start-column="20" selection-end-line="105" selection-end-column="20" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/human_aware_rl/imitation/behavioural_cloning.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="361">
+          <caret line="19" column="35" selection-start-line="19" selection-start-column="35" selection-end-line="19" selection-end-column="35" />
+          <folding>
+            <element signature="e#0#10#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/human_aware_rl/experiments/bc_experiments.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="726">
-          <caret line="153" column="26" lean-forward="true" selection-start-line="153" selection-start-column="26" selection-end-line="153" selection-end-column="26" />
+        <state relative-caret-position="625">
+          <caret line="165" column="26" lean-forward="true" selection-start-line="165" selection-start-column="26" selection-end-line="165" selection-end-column="26" />
           <folding>
             <element signature="e#0#11#0" expanded="true" />
           </folding>
