@@ -8,7 +8,7 @@ from sacred import Experiment
 from sacred.observers import FileStorageObserver
 from tensorflow.saved_model import simple_save
 
-PPO_DATA_DIR = 'data/ppo_poor_runs/'
+PPO_DATA_DIR = 'data/ppo_quarter_runs/'
 
 ex = Experiment('PPO')
 ex.observers.append(FileStorageObserver.create(PPO_DATA_DIR + 'ppo_exp'))

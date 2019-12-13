@@ -116,7 +116,8 @@ def run_all_bc_experiments():
     # params_random1 = {"layout_name": "random1", "num_epochs": 120, "lr": 1e-3, "adam_eps":1e-8}
     # params_random0 = {"layout_name": "random0", "num_epochs": 90, "lr": 1e-3, "adam_eps":1e-8}
     # params_random3 = {"layout_name": "random3", "num_epochs": 110, "lr": 1e-3, "adam_eps":1e-8}
-    train_params = [params_random0, params_random3]	
+    train_params = [params_simple,  params_unident, params_random1]
+    # train_params = [params_simple, params_unindent, params_random1, params_random2, params_random3]		
     all_params = [params_simple, params_random1, params_unident, params_random0, params_random3]
     train_bc_models(train_params, seeds)
 
