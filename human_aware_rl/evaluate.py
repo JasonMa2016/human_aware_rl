@@ -40,36 +40,50 @@ def get_ppo_agent(ppo_dir, save_dir, seed, best=False):
 
 #
 seeds = [9456, 1887, 5578, 5987, 516]
+seeds = [9456, 1887]
 
 # for each PPO agent trained with the BEST BC model
 ppo_path_half = 'data/ppo_poor_runs/'
 ppo_path_full = 'data/ppo_runs/'
-ppo_paths = {"good":ppo_path_full, "bad": ppo_path_half}
 
-performances = dict.fromkeys(['good','bad'], [])
+bc_path_full = 'data/bc_runs/'
+bc_path_half = 'data/bc_runs_poor/'
+ppo_paths = {"bad": ppo_path_half}
+bc_paths = {"good": bc_path_full, "bad": bc_path_half}
 
-print(BC_SAVE_DIR)
+performances = {}
+
 
 for seed in seeds:
-	ppo_bc_train_path = 'ppo_bc_train_simple'
+	ppo_bc_train_path = 'ppo_bc_train_unident_s'
+	for model in ppo_paths:
+		agent_ppo_bc_train, ppo_config = get_ppo_agent(ppo_paths[model], ppo_bc_train_path, seed, best=False)
+		if model not in performances:
+			performances[model] = {}
+		for bc_model in bc_paths:
+			if bc_model not in performances[model]:
+				performances[model][bc_model] = []
+			for i in range(5):
+				bc_model_path = 'unident_s_bc_test_seed' + str(i)
+				agent_bc_test, bc_params = get_bc_agent_from_saved(bc_paths[bc_model], bc_model_path)
+				evaluator = AgentEvaluator(mdp_params=bc_params["mdp_params"], env_params=bc_params["env_params"])
 
-	for i in range(5):
-		bc_model_path = 'simple_bc_test_seed' + str(i)
-		agent_bc_test, bc_params = get_bc_agent_from_saved(bc_model_path)
-		evaluator = AgentEvaluator(mdp_params=bc_params["mdp_params"], env_params=bc_params["env_params"])
+	# Figure out where these agents are trained from hehe
+			# for model in ppo_paths:
+			# 	if model not in performances:
+			# 		performances[model] = []
+			# 	agent_ppo_bc_train, ppo_config = get_ppo_agent(ppo_paths[model], ppo_bc_train_path, seed, best=False)
 
-# Figure out where these agents are trained from hehe
-		for model in ppo_paths:
-			agent_ppo_bc_train, ppo_config = get_ppo_agent(ppo_paths[model], ppo_bc_train_path, seed, best=False)
+				ppo_and_bc = evaluator.evaluate_agent_pair(AgentPair(agent_ppo_bc_train, agent_bc_test), num_games=10, display=False)
+				avg_ppo_and_bc = np.mean(ppo_and_bc['ep_returns'])
+				print("PPO model: {}, BC model: {}, PPO seed: {}, BC seed: {}".format(model, bc_model, seed, i))
+				performances[model][bc_model].append(avg_ppo_and_bc)
 
-			ppo_and_bc = evaluator.evaluate_agent_pair(AgentPair(agent_ppo_bc_train, agent_bc_test), num_games=10, display=False)
-			avg_ppo_and_bc = np.mean(ppo_and_bc['ep_returns'])
-			performances[model].append(avg_ppo_and_bc)
-			print("BC model: {}, PPO seed: {}, BC seed: {}".format(model, seed, i))
-			print(avg_ppo_and_bc)
 
-np.save('test_bad_BC_model.npy', performances)
+np.save('test_PPO_BC_model_unindent.npy', performances)
+
 for model in performances:
-	results = np.array(performances[model])
-	print("BC model: {}, Average return: {}, std: {}".format(model, np.mean(results), np.std(results)))
+	for bc_model in performances[model]:
+		results = np.array(performances[model][bc_model])
+		print("PPO model: {}, BC model: {}, Average return: {}, std: {}".format(model, bc_model, np.mean(results), np.std(results)))
 
