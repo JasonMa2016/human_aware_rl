@@ -78,8 +78,8 @@ def save_bc_model(model_save_dir, model, bc_params):
     }
     save_pickle(bc_metadata, BC_SAVE_DIR + model_save_dir + "bc_metadata")
 
-def get_bc_agent_from_saved(model_name, no_waits=False):
-    model, bc_params = load_bc_model_from_path(model_name)
+def get_bc_agent_from_saved(bc_save_dir, model_name, no_waits=False):
+    model, bc_params = load_bc_model_from_path(bc_save_dir, model_name)
     return get_bc_agent_from_model(model, bc_params, no_waits), bc_params
 
 def get_bc_agent_from_model(model, bc_params, no_waits=False):
@@ -124,13 +124,13 @@ def eval_with_benchmarking_from_saved(n_games, model_name, no_waits=False, displ
     model, bc_params = load_bc_model_from_path(model_name)
     return eval_with_benchmarking_from_model(n_games, model, bc_params, no_waits, display=display)
 
-def load_bc_model_from_path(model_name):
+def load_bc_model_from_path(bc_save_dir, model_name):
     # NOTE: The lowest loss and highest accuracy models 
     # were also saved, can be found in the same dir with
     # special suffixes.
-    bc_metadata = load_pickle(BC_SAVE_DIR + model_name + "/bc_metadata")
+    bc_metadata = load_pickle(bc_save_dir + model_name + "/bc_metadata")
     bc_params = bc_metadata["bc_params"]
-    model = GAIL.load(BC_SAVE_DIR + model_name + "/model")
+    model = GAIL.load(bc_save_dir + model_name + "/model")
     return model, bc_params
 
 def plot_bc_run(run_info, num_epochs):

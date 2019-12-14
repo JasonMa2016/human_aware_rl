@@ -10,6 +10,11 @@ from human_aware_rl.utils import create_dir_if_not_exists, reset_tf, delete_dir_
 from human_aware_rl.imitation.behavioural_cloning import get_bc_agent_from_saved, DEFAULT_ENV_PARAMS, BC_SAVE_DIR
 from human_aware_rl.experiments.bc_experiments import BEST_BC_MODELS_PATH
 
+from human_aware_rl.meta_utils import *
+from human_aware_rl.maml_rl.metalearner import MetaLearner 
+from human_aware_rl.maml_rl.policies import CategoricalMLPPolicy
+from human_aware_rl.maml_rl.baseline import LinearFeatureBaseline 
+
 reset_tf()
 
 if __name__ == "__main__":
@@ -230,36 +235,44 @@ if __name__ == "__main__":
             "grad_updates_per_agent": GRAD_UPDATES_PER_AGENT
         }
 
-        def configure_bc_agent(bc_save_dir, bc_model_path, gym_env, mlp, mdp):
-            '''
-            Configure the BC agent from its model path
-            '''
-
-            print("LOADING BC MODEL FROM: {}{}".format(bc_save_dir, bc_model_path))
-            agent, bc_params = get_bc_agent_from_saved(bc_save_dir, bc_model_path)
-
-            gym_env.use_action_method = True
-            assert mlp.mdp == mdp
-            agent.set_mdp(mdp)
-            gym_env.other_agent = agent
-
         mdp = OvercookedGridworld.from_layout_name(**params["mdp_params"])
         env = OvercookedEnv(mdp, **params["env_params"])
-        mlp = MediumLevelPlanner.from_pickle_or_compute(mdp, NO_COUNTERS_PARAMS, force_compute=True) 
+        # mlp = MediumLevelPlanner.from_pickle_or_compute(mdp, NO_COUNTERS_PARAMS, force_compute=True) 
 
         # Configure gym env
-        gym_env = get_vectorized_gym_env(
-            env, 'Overcooked-v0', featurize_fn=lambda x: mdp.lossless_state_encoding(x), **params
-        )
+        sampler = BatchSampler(env, 'Overcooked-v0', mdp, 3)
+        # gym_env = get_vectorized_gym_env(
+        #     env, 'Overcooked-v0', featurize_fn=lambda x: mdp.lossless_state_encoding(x), **params
+        # )
+
+        sampler.configure_bc_agent(bc_paths['good'], 'unident_s_bc_train_seed' + str(1))
 
 
-        gym_env.self_play_randomization = 0 if params["SELF_PLAY_HORIZON"] is None else 1
-        gym_env.trajectory_sp = params["TRAJECTORY_SELF_PLAY"]
-        gym_env.update_reward_shaping_param(1 if params["mdp_params"]["rew_shaping_params"] != 0 else 0)
+            # assume continuous actions
+        policy = CategoricalMLPPolicy(
+            int(np.prod(sampler.envs.observation_space.shape)),
+            int(np.prod(sampler.envs.action_space.shape)),
+            hidden_sizes=(10, ) * 5)
 
+        # Linear baseline 
+        baseline = LinearFeatureBaseline(
+            int(np.prod(sampler.envs.observation_space.shape)))
+
+        metalearner = MetaLearner(sampler, policy, baseline)
+        tasks = []
         for bc_model in bc_paths:
-            for i in range(5):
+            for i in range(1):
                 bc_model_path = 'unident_s_bc_train_seed' + str(i)
-                print(bc_paths[bc_model], bc_model_path)
-                configure_bc_agent(bc_paths[bc_model], bc_model_path, gym_env, mlp, mdp)
+                tasks.append((bc_paths[bc_model], bc_model_path))
+
+        episodes, grads, successes = metalearner.sample(tasks)
+        # gym_env.self_play_randomization = 0 if params["SELF_PLAY_HORIZON"] is None else 1
+        # gym_env.trajectory_sp = params["TRAJECTORY_SELF_PLAY"]
+        # gym_env.update_reward_shaping_param(1 if params["mdp_params"]["rew_shaping_params"] != 0 else 0)
+
+        # for bc_model in bc_paths:
+        #     for i in range(5):
+        #         bc_model_path = 'unident_s_bc_train_seed' + str(i)
+        #         print(bc_paths[bc_model], bc_model_path)
+        #         configure_bc_agent(bc_paths[bc_model], bc_model_path, gym_env, mlp, mdp)
     run()
