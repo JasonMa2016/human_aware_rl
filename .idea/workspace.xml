@@ -2,26 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cfff82c0-7032-4a90-8122-41a2a82ad4f3" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/human_aware_rl/experiments/maml_ppo_experiments.sh" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/overcooked_ai/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/baselines" beforeDir="false" afterPath="$PROJECT_DIR$/baselines" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/baselines/baselines/common/vec_env/subproc_vec_env.py" beforeDir="false" afterPath="$PROJECT_DIR$/baselines/baselines/common/vec_env/subproc_vec_env.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/baselines/baselines/ppo2/model.py" beforeDir="false" afterPath="$PROJECT_DIR$/baselines/baselines/ppo2/model.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/baselines/baselines/ppo2/ppo2.py" beforeDir="false" afterPath="$PROJECT_DIR$/baselines/baselines/ppo2/ppo2.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/baselines/baselines/ppo2/runner.py" beforeDir="false" afterPath="$PROJECT_DIR$/baselines/baselines/ppo2/runner.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/human_aware_rl/Human-AI data wrangling (Anonymized).ipynb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/human_aware_rl/Human-Human data wrangling (Anonymized).ipynb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/human_aware_rl/NeurIPS Experiments and Visualizations.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/human_aware_rl/NeurIPS Experiments and Visualizations.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/human_aware_rl/baselines_utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/human_aware_rl/baselines_utils.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/human_aware_rl/evaluate.py" beforeDir="false" afterPath="$PROJECT_DIR$/human_aware_rl/evaluate.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/human_aware_rl/experiments/bc_experiments.py" beforeDir="false" afterPath="$PROJECT_DIR$/human_aware_rl/experiments/bc_experiments.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/human_aware_rl/imitation/behavioural_cloning.py" beforeDir="false" afterPath="$PROJECT_DIR$/human_aware_rl/imitation/behavioural_cloning.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/human_aware_rl/maml/maml.py" beforeDir="false" afterPath="$PROJECT_DIR$/human_aware_rl/maml/maml.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/human_aware_rl/maml_rl/metalearner.py" beforeDir="false" afterPath="$PROJECT_DIR$/human_aware_rl/maml_rl/metalearner.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/human_aware_rl/meta_utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/human_aware_rl/meta_utils.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/human_aware_rl/ppo/ppo.py" beforeDir="false" afterPath="$PROJECT_DIR$/human_aware_rl/ppo/ppo.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/human_aware_rl/test_PPO_BC_model_simple.npy" beforeDir="false" afterPath="$PROJECT_DIR$/human_aware_rl/test_PPO_BC_model_simple.npy" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/overcooked_ai" beforeDir="false" afterPath="$PROJECT_DIR$/overcooked_ai" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/overcooked_ai/overcooked_ai_py/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/overcooked_ai/overcooked_ai_py/utils.py" afterDir="false" />
     </list>
@@ -47,7 +33,7 @@
           <entry key="json" value="1" />
           <entry key="md" value="1" />
           <entry key="pickle" value="2" />
-          <entry key="py" value="109" />
+          <entry key="py" value="110" />
           <entry key="sh" value="8" />
           <entry key="txt" value="2" />
         </counts>
@@ -59,7 +45,7 @@
           <entry key="JSON" value="1" />
           <entry key="Markdown" value="1" />
           <entry key="PLAIN_TEXT" value="5" />
-          <entry key="Python" value="109" />
+          <entry key="Python" value="110" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
@@ -133,14 +119,23 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/human_aware_rl/maml/maml_ppo.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="580">
+            <state relative-caret-position="589">
               <caret line="434" column="48" lean-forward="true" selection-start-line="434" selection-start-column="48" selection-end-line="434" selection-end-column="48" />
               <folding>
                 <element signature="e#0#37#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/overcooked_ai/overcooked_ai_py/utils.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="266">
+              <caret line="16" column="29" selection-start-line="16" selection-start-column="29" selection-end-line="16" selection-end-column="29" />
             </state>
           </provider>
         </entry>
@@ -192,7 +187,7 @@
     </replaceStrings>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/overcooked_ai" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -258,18 +253,6 @@
               <item name="human_aware_rl" type="b2602c69:ProjectViewProjectNode" />
               <item name="human_aware_rl" type="462c0819:PsiDirectoryNode" />
               <item name="human_aware_rl" type="462c0819:PsiDirectoryNode" />
-              <item name="maml" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="human_aware_rl" type="b2602c69:ProjectViewProjectNode" />
-              <item name="human_aware_rl" type="462c0819:PsiDirectoryNode" />
-              <item name="human_aware_rl" type="462c0819:PsiDirectoryNode" />
-              <item name="maml_rl" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="human_aware_rl" type="b2602c69:ProjectViewProjectNode" />
-              <item name="human_aware_rl" type="462c0819:PsiDirectoryNode" />
-              <item name="human_aware_rl" type="462c0819:PsiDirectoryNode" />
               <item name="ppo" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -306,6 +289,12 @@
               <item name="human_aware_rl" type="b2602c69:ProjectViewProjectNode" />
               <item name="human_aware_rl" type="462c0819:PsiDirectoryNode" />
               <item name="overcooked_ai" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="human_aware_rl" type="b2602c69:ProjectViewProjectNode" />
+              <item name="human_aware_rl" type="462c0819:PsiDirectoryNode" />
+              <item name="overcooked_ai" type="462c0819:PsiDirectoryNode" />
+              <item name="overcooked_ai_py" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -348,7 +337,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-1920" y="0" width="1920" height="1080" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.17465389" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -465,13 +453,6 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/overcooked_ai/.gitignore">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/overcooked_ai/overcooked_ai_py/utils.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="266">
-          <caret line="16" column="29" selection-start-line="16" selection-start-column="29" selection-end-line="16" selection-end-column="29" />
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Human-Human data wrangling (Anonymized).ipynb">
       <provider selected="true" editor-type-id="ipnb-editor">
@@ -812,11 +793,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/human_aware_rl/maml/maml_ppo.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="580">
+        <state relative-caret-position="589">
           <caret line="434" column="48" lean-forward="true" selection-start-line="434" selection-start-column="48" selection-end-line="434" selection-end-column="48" />
           <folding>
             <element signature="e#0#37#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/overcooked_ai/overcooked_ai_py/utils.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="266">
+          <caret line="16" column="29" selection-start-line="16" selection-start-column="29" selection-end-line="16" selection-end-column="29" />
         </state>
       </provider>
     </entry>
