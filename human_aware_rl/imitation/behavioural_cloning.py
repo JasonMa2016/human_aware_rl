@@ -47,7 +47,7 @@ def init_gym_env(bc_params):
 def train_bc_agent(model_save_dir, bc_params, num_epochs=1000, lr=1e-4, adam_eps=1e-8):
     # Extract necessary expert data and save in right format
     expert_trajs = get_trajs_from_data(**bc_params["data_params"])
-    
+
     # Load the expert dataset
     save_npz_file(expert_trajs, "temp.npz")
     dataset = ExpertDataset(expert_path="temp.npz", verbose=1, train_fraction=0.85)
@@ -60,10 +60,12 @@ def bc_from_dataset_and_params(dataset, bc_params, model_save_dir, num_epochs, l
     gym_env = init_gym_env(bc_params)
 
     # Train and save model
-    create_dir_if_not_exists(BC_SAVE_DIR + model_save_dir)
+    # create_dir_if_not_exists(BC_SAVE_DIR + model_save_dir)
+    create_dir_if_not_exists(model_save_dir)
 
     model = GAIL("MlpPolicy", gym_env, dataset, verbose=1)
-    model.pretrain(dataset, n_epochs=num_epochs, learning_rate=lr, adam_epsilon=adam_eps, save_dir=BC_SAVE_DIR + model_save_dir)
+    # model.pretrain(dataset, n_epochs=num_epochs, learning_rate=lr, adam_epsilon=adam_eps, save_dir=BC_SAVE_DIR + model_save_dir)
+    model.pretrain(dataset, n_epochs=num_epochs, learning_rate=lr, adam_epsilon=adam_eps, save_dir=model_save_dir)
 
     save_bc_model(model_save_dir, model, bc_params)
     return model
@@ -71,12 +73,15 @@ def bc_from_dataset_and_params(dataset, bc_params, model_save_dir, num_epochs, l
 def save_bc_model(model_save_dir, model, bc_params):
     print("Saved BC model at", BC_SAVE_DIR + model_save_dir)
     print(model_save_dir)
-    model.save(BC_SAVE_DIR + model_save_dir + "model")
+    # model.save(BC_SAVE_DIR + model_save_dir + "model")
+    model.save(model_save_dir + "model")
+
     bc_metadata = {
         "bc_params": bc_params,
         "train_info": model.bc_info
     }
-    save_pickle(bc_metadata, BC_SAVE_DIR + model_save_dir + "bc_metadata")
+    # save_pickle(bc_metadata, BC_SAVE_DIR + model_save_dir + "bc_metadata")
+    save_pickle(bc_metadata, model_save_dir + "bc_metadata")
 
 def get_bc_agent_from_saved(bc_save_dir, model_name, no_waits=False):
     model, bc_params = load_bc_model_from_path(bc_save_dir, model_name)
@@ -133,13 +138,17 @@ def load_bc_model_from_path(bc_save_dir, model_name):
     model = GAIL.load(bc_save_dir + model_name + "/model")
     return model, bc_params
 
-def plot_bc_run(run_info, num_epochs):
+def plot_bc_run(run_info, num_epochs,save_dir=None):
     xs = range(0, num_epochs, max(int(num_epochs/10), 1))
     plt.plot(xs, run_info['train_losses'], label="train loss")
     plt.plot(xs, run_info['val_losses'], label="val loss")
     plt.plot(xs, run_info['val_accuracies'], label="val accuracy")
     plt.legend()
-    plt.show()
+    if not save_dir:
+        plt.show()
+    else:
+        plt.savefig(save_dir)
+        plt.close()
 
 
 class ImitationAgentFromPolicy(AgentFromPolicy):

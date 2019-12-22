@@ -51,12 +51,12 @@ bc_path_full = 'data/bc_runs/'
 bc_path_half = 'data/bc_runs_half/'
 bc_path_quarter = 'data/bc_runs_quarter/'
 
-ppo_paths = {"full": ppo_path_full, "half": ppo_path_half, "quarter": ppo_path_quarter}
+ppo_paths = {"half": ppo_path_half, "quarter": ppo_path_quarter}
 bc_paths = {"full": bc_path_full, "half": bc_path_half, "quarter": bc_path_quarter}
 
 performances = {}
 
-layout_name = 'simple'
+layout_name = 'unident_s'
 for seed in seeds:
 	ppo_bc_train_path = 'ppo_bc_train_' + layout_name
 	for model in ppo_paths:

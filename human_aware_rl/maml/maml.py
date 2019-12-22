@@ -240,19 +240,20 @@ if __name__ == "__main__":
         # mlp = MediumLevelPlanner.from_pickle_or_compute(mdp, NO_COUNTERS_PARAMS, force_compute=True) 
 
         # Configure gym env
-        sampler = BatchSampler(env, 'Overcooked-v0', mdp, 3)
+        sampler = BatchSampler(env, 'Overcooked-v0', mdp, 2,num_workers=7)
         # gym_env = get_vectorized_gym_env(
         #     env, 'Overcooked-v0', featurize_fn=lambda x: mdp.lossless_state_encoding(x), **params
         # )
 
-        sampler.configure_bc_agent(bc_paths['good'], 'unident_s_bc_train_seed' + str(1))
+        # sampler.configure_bc_agent(bc_paths['good'], 'unident_s_bc_train_seed' + str(1))
 
 
-            # assume continuous actions
+        # discrete actions
+        # FIX the hard code
         policy = CategoricalMLPPolicy(
             int(np.prod(sampler.envs.observation_space.shape)),
-            int(np.prod(sampler.envs.action_space.shape)),
-            hidden_sizes=(10, ) * 5)
+            int(sampler.envs.action_space.n),
+            hidden_sizes=(5, ) * 2)
 
         # Linear baseline 
         baseline = LinearFeatureBaseline(
@@ -266,9 +267,6 @@ if __name__ == "__main__":
                 tasks.append((bc_paths[bc_model], bc_model_path))
 
         episodes, grads, successes = metalearner.sample(tasks)
-        # gym_env.self_play_randomization = 0 if params["SELF_PLAY_HORIZON"] is None else 1
-        # gym_env.trajectory_sp = params["TRAJECTORY_SELF_PLAY"]
-        # gym_env.update_reward_shaping_param(1 if params["mdp_params"]["rew_shaping_params"] != 0 else 0)
 
         # for bc_model in bc_paths:
         #     for i in range(5):

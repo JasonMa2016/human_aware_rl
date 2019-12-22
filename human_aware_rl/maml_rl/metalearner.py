@@ -76,7 +76,7 @@ class MetaLearner(object):
             # collect meta-training set (current policy)
             train_episodes, train_successes = self.sampler.sample(self.policy, gamma=self.gamma,
                 device=self.device)
-
+            print("done")
             # compute adapted parameters
             params, task_grads = self.adapt(train_episodes)
 

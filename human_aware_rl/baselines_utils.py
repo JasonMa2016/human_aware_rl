@@ -351,6 +351,13 @@ def overwrite_variables(variables_to_copy, variables_to_overwrite):
         restores.append(v.assign(d))
     sess.run(restores)
     
+def subtract_variables(variables_to_be_subtracted, variables_parent):
+    sess = tf.get_default_session()
+    restores = []
+    assert len(variables_parent) == len(variables_to_be_subtracted)
+    for d,v in zip(variables_to_be_subtracted, variables_parent):
+        restores.append(v.assign_sub(d))
+    sess.run(restores)
 
 ############################
 #### DEPRECATED METHODS ####

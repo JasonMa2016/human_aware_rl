@@ -35,7 +35,7 @@ def my_config():
     ##################
 
     TIMESTAMP_DIR = True
-    EX_NAME = "undefined_name"
+    EX_NAME = "ppo_bc_train_simple_jason"
 
     if TIMESTAMP_DIR:
         SAVE_DIR = PPO_DATA_DIR + time.strftime('%Y_%m_%d-%H_%M_%S_') + EX_NAME + "/"
@@ -47,7 +47,7 @@ def my_config():
     RUN_TYPE = "ppo"
 
     # Reduce parameters to be able to run locally to test for simple bugs
-    LOCAL_TESTING = False
+    LOCAL_TESTING = True
 
     # Choice among: bc_train, bc_test, sp, hm, rnd
     OTHER_AGENT_TYPE = "bc_train"
@@ -147,7 +147,7 @@ def my_config():
     ##################
 
     # Mdp params
-    layout_name = None
+    layout_name = 'simple'
     start_order_list = None
 
     rew_shaping_params = {
@@ -251,7 +251,7 @@ def configure_other_agent(params, gym_env, mlp, mdp):
             raise ValueError("Other agent type must be bc train or bc test")
 
         print("LOADING BC MODEL FROM: {}".format(bc_model_path))
-        agent, bc_params = get_bc_agent_from_saved(bc_model_path)
+        agent, bc_params = get_bc_agent_from_saved(BC_SAVE_DIR, bc_model_path)
         gym_env.use_action_method = True
         # Make sure environment params are the same in PPO as in the BC model
         for k, v in bc_params["env_params"].items():
@@ -386,15 +386,20 @@ def ppo_run(params):
         gym_env = get_vectorized_gym_env(
             env, 'Overcooked-v0', featurize_fn=lambda x: mdp.lossless_state_encoding(x), **params
         )
-        gym_env.self_play_randomization = 0 if params["SELF_PLAY_HORIZON"] is None else 1
-        gym_env.trajectory_sp = params["TRAJECTORY_SELF_PLAY"]
-        gym_env.update_reward_shaping_param(1 if params["mdp_params"]["rew_shaping_params"] != 0 else 0)
+        gym_env.self_play_randomization = 0 if params["SELF_PLAY_HORIZON"] is None else 1 # 1
+        gym_env.self_play_randomization = 1 
+        gym_env.trajectory_sp = params["TRAJECTORY_SELF_PLAY"] # True
+        gym_env.update_reward_shaping_param(1 if params["mdp_params"]["rew_shaping_params"] != 0 else 0) # 1
 
+        print("self_play_randomization: {}".format(gym_env.self_play_randomization))
+        print("trajectory_sp: {}".format(gym_env.trajectory_sp))
         configure_other_agent(params, gym_env, mlp, mdp)
 
         # Create model
         with tf.device('/device:GPU:{}'.format(params["GPU_ID"])):
             model = create_model(gym_env, "ppo_agent", **params)
+
+        print("start updating!")
 
         # Train model
         params["CURR_SEED"] = seed

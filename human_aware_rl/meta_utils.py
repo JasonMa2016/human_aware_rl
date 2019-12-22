@@ -32,7 +32,13 @@ class BatchSampler(object):
         # self.mlp = mlp
         self.queue = mp.Queue() 
         self.envs = RewardShapingEnv(SubprocVecEnv([make_env(base_env, env_name, featurize_fn=lambda x: mdp.lossless_state_encoding(x))
-         for _ in range(num_workers)]))
+         for _ in range(num_workers)], queue=self.queue))
+        # self.envs = SubprocVecEnv([make_env(base_env, env_name, featurize_fn=lambda x: mdp.lossless_state_encoding(x))
+        #  for _ in range(num_workers)], queue=self.queue)
+        self.envs.self_play_randomization = 1
+        self.envs.trajectory_sp = True
+        self.envs.update_reward_shaping_param(1)
+
         self._env = make_env(base_env, env_name, featurize_fn=lambda x: mdp.lossless_state_encoding(x))()
 
     def sample(self, policy, params=None, gamma=0.95, device='cpu'):
@@ -43,17 +49,36 @@ class BatchSampler(object):
             self.queue.put(i)
         for _ in range(self.num_workers):
             self.queue.put(None)
-        # print(self.envs.reset())
-        observations = self.envs.reset() 
+
+        observations, batch_ids = self.envs.reset() 
+
+        observations, agent_id = observations['both_agent_obs'], observations['other_agent_env_idx']
+        assert(len(set(agent_id)) == 1)
+        observations = observations[:,1-agent_id[0]]
         dones = [False]
         successes = []
+        count = 0
         while (not all(dones)) or (not self.queue.empty()):
+            print(count)
+            count += 1
             with torch.no_grad():
                 observations_tensor = torch.from_numpy(observations).to(device=device).float()
+                observations_tensor = observations_tensor.view(observations_tensor.shape[0], int(np.prod(
+                    observations_tensor.shape[1:])))
                 actions_tensor = policy(observations_tensor, params=params).sample()
-                actions = actions_tensor.cpu().numpy() 
-            new_observations, rewards, dones, new_batch_ids, infos = self.envs.step(actions)
-
+                actions = actions_tensor.cpu().numpy()
+                # print(actions)
+                # # get real action s
+                # actions = np.stack([actions, np.zeros(len(actions),dtype=int)])
+                # actions = actions.T
+                other_actions = np.zeros(len(actions), dtype=int)
+                print(actions)
+                # print(list(actions))
+                joint_action = [(actions[i], other_actions[i]) for i in range(len(actions))]
+                print(joint_action)
+            print("here?")
+            new_observations, rewards, dones, new_batch_ids, infos = self.envs.step(joint_action)
+            print("done?")
             episodes.append(observations, actions, rewards, new_observations, batch_ids)
             observations, batch_ids = new_observations, new_batch_ids
         # print(episodes.rewards.shape)
