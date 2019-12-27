@@ -46,9 +46,8 @@ def my_config():
 
     RUN_TYPE = "ppo"
 
--
     # Reduce parameters to be able to run locally to test for simple bugs
-    LOCAL_TESTING = True
+    LOCAL_TESTING = False
 
     # Choice among: bc_train, bc_test, sp, hm, rnd
     OTHER_AGENT_TYPE = "bc_train"
@@ -71,14 +70,6 @@ def my_config():
     # Every `VIZ_FREQUENCY` gradient steps, display the first 100 steps of a rollout of the agents
     VIZ_FREQUENCY = 50 if not LOCAL_TESTING else 10
 
-    ##################
-    # META PARAMS #
-    ##################
-    NUM_META_ITERATIONS = 20
-    META_BATCH_SIZE = 10
-
-    META_FACTOR = NUM_META_ITERATIONS * META_BATCH_SIZE
-
     ##############
     # PPO PARAMS #
     ##############
@@ -89,9 +80,6 @@ def my_config():
     # How many environment timesteps will be simulated (across all environments)
     # for one set of gradient updates. Is divided equally across environments
     TOTAL_BATCH_SIZE = 12000 if not LOCAL_TESTING else 800
-
-    PPO_RUN_TOT_TIMESTEPS = PPO_RUN_TOT_TIMESTEPS // META_FACTOR
-    TOTAL_BATCH_SIZE = TOTAL_BATCH_SIZE // META_FACTOR
 
     # Number of minibatches we divide up each batch into before
     # performing gradient steps
@@ -139,7 +127,11 @@ def my_config():
     # Recommended to keep to true
     TRAJECTORY_SELF_PLAY = True
 
-
+    ##################
+    # META PARAMS #
+    ##################
+    NUM_META_ITERATIONS = 50
+    META_BATCH_SIZE = 10
 
     ##################
     # NETWORK PARAMS #
@@ -194,7 +186,7 @@ def my_config():
         "EX_NAME": EX_NAME,
         "SAVE_DIR": SAVE_DIR,
         "GPU_ID": GPU_ID,
-        "PPO_RUN_TOT_TIMESTEPS": PPO_RUN_TOT_TIMESTEPS,
+        "PPO_RUN_TOT_TIMESTEPS": PPO_RUN_TOT_TIMESTEPS / (NUM_META_ITERATIONS * META_BATCH_SIZE),
         "mdp_params": {
             "layout_name": layout_name,
             "start_order_list": start_order_list,
@@ -427,7 +419,7 @@ def ppo_run(params):
                 configure_bc_agent(bc_path, current_agent, gym_env, mlp, mdp)
 
                 with tf.device('/device:GPU:{}'.format(params["GPU_ID"])):
-                    agent_model = create_model(gym_env, current_agent+str(i), **params)
+                    agent_model = create_model(gym_env, current_agent+"_"+ str(i), **params)
 
                 overwrite_model(meta_model, agent_model)
 

@@ -27,18 +27,21 @@ def get_ppo_agent(ppo_dir, save_dir, seed, best=False):
         agent = get_agent_from_saved_model(save_dir + "/ppo_agent", config["sim_threads"])
     return agent, config
 
-seeds = [9456, 1887, 5578, 5987, 516]
+# seeds = [9456, 1887, 5578, 5987, 516]
 seeds = [9456]
 
-bc_path_half = 'data/bc_runs_half/'
 ppo_path_half = 'data/ppo_runs_half/'
 ppo_paths = {"half": ppo_path_half}
+
+maml_ppo_path = 'thesis_data/maml_ppo/'
+ppo_paths = {"maml": maml_ppo_path}
 
 layout_name = 'simple'
 performances = {}
 
 for seed in seeds:
-    ppo_bc_train_path = 'ppo_bc_train_' + layout_name
+    # ppo_bc_train_path = 'ppo_bc_train_' + layout_name
+    ppo_bc_train_path = 'maml_ppo_bc_train_' + layout_name
     for model in ppo_paths:
         agent_ppo_bc_train, ppo_config = get_ppo_agent(ppo_paths[model], ppo_bc_train_path, seed, best=False)
         if model not in performances:
@@ -63,7 +66,7 @@ for seed in seeds:
                 performances[model][worker_idx].append(avg_ppo_and_bc)
 
 
-np.save('thesis_data/test_PPO_BC_model_simple_test.npy', performances)
+np.save('thesis_data/test_MAML_PPO_BC_model_simple_train.npy', performances)
 
 for model in performances:
     for worker_idx in performances[model]:
