@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="cfff82c0-7032-4a90-8122-41a2a82ad4f3" name="Default Changelist" comment="">
       <change afterPath="$PROJECT_DIR$/overcooked_ai/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/baselines" beforeDir="false" afterPath="$PROJECT_DIR$/baselines" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/baselines/baselines/common/vec_env/subproc_vec_env.py" beforeDir="false" afterPath="$PROJECT_DIR$/baselines/baselines/common/vec_env/subproc_vec_env.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/baselines/baselines/ppo2/model.py" beforeDir="false" afterPath="$PROJECT_DIR$/baselines/baselines/ppo2/model.py" afterDir="false" />
@@ -11,7 +10,6 @@
       <change beforePath="$PROJECT_DIR$/baselines/baselines/ppo2/runner.py" beforeDir="false" afterPath="$PROJECT_DIR$/baselines/baselines/ppo2/runner.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/human_aware_rl/experiments/maml_ppo_experiments.sh" beforeDir="false" afterPath="$PROJECT_DIR$/human_aware_rl/experiments/maml_ppo_experiments.sh" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/human_aware_rl/maml/maml_ppo.py" beforeDir="false" afterPath="$PROJECT_DIR$/human_aware_rl/maml/maml_ppo.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/human_aware_rl/thesis_bc_data_evaluate.py" beforeDir="false" afterPath="$PROJECT_DIR$/human_aware_rl/thesis_bc_data_evaluate.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/overcooked_ai" beforeDir="false" afterPath="$PROJECT_DIR$/overcooked_ai" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/overcooked_ai/overcooked_ai_py/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/overcooked_ai/overcooked_ai_py/utils.py" afterDir="false" />
     </list>
@@ -84,10 +82,21 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/human_aware_rl/maml/maml_ppo.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="228">
-              <caret line="90" lean-forward="true" selection-start-line="90" selection-end-line="90" />
+            <state relative-caret-position="611">
+              <caret line="53" lean-forward="true" selection-start-line="53" selection-end-line="53" />
               <folding>
                 <element signature="e#0#37#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/human_aware_rl/thesis_experiments/bc_experiments.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state>
+              <folding>
+                <element signature="e#0#11#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -97,7 +106,7 @@
         <entry file="file://$PROJECT_DIR$/baselines/baselines/ppo2/ppo2.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="273">
-              <caret line="135" column="38" lean-forward="true" selection-start-line="135" selection-start-column="38" selection-end-line="135" selection-end-column="38" />
+              <caret line="135" column="38" selection-start-line="135" selection-start-column="38" selection-end-line="135" selection-end-column="38" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
               </folding>
@@ -129,8 +138,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/human_aware_rl/experiments/maml_ppo_experiments.sh">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="19">
-              <caret line="1" selection-start-line="1" selection-end-line="1" />
+            <state>
+              <caret column="189" selection-start-column="189" selection-end-column="189" />
             </state>
           </provider>
         </entry>
@@ -179,7 +188,6 @@
       <find>_train_op</find>
       <find>values</find>
       <find>act_model</find>
-      <find>values</find>
       <find>self_play_rando</find>
       <find>train_model</find>
       <find>model.train</find>
@@ -247,68 +255,6 @@
               <item name="human_aware_rl" type="462c0819:PsiDirectoryNode" />
               <item name="baselines" type="462c0819:PsiDirectoryNode" />
               <item name="baselines" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="human_aware_rl" type="b2602c69:ProjectViewProjectNode" />
-              <item name="human_aware_rl" type="462c0819:PsiDirectoryNode" />
-              <item name="baselines" type="462c0819:PsiDirectoryNode" />
-              <item name="baselines" type="462c0819:PsiDirectoryNode" />
-              <item name="ppo2" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="human_aware_rl" type="b2602c69:ProjectViewProjectNode" />
-              <item name="human_aware_rl" type="462c0819:PsiDirectoryNode" />
-              <item name="human_aware_rl" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="human_aware_rl" type="b2602c69:ProjectViewProjectNode" />
-              <item name="human_aware_rl" type="462c0819:PsiDirectoryNode" />
-              <item name="human_aware_rl" type="462c0819:PsiDirectoryNode" />
-              <item name="data" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="human_aware_rl" type="b2602c69:ProjectViewProjectNode" />
-              <item name="human_aware_rl" type="462c0819:PsiDirectoryNode" />
-              <item name="human_aware_rl" type="462c0819:PsiDirectoryNode" />
-              <item name="data" type="462c0819:PsiDirectoryNode" />
-              <item name="ppo_runs" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="human_aware_rl" type="b2602c69:ProjectViewProjectNode" />
-              <item name="human_aware_rl" type="462c0819:PsiDirectoryNode" />
-              <item name="human_aware_rl" type="462c0819:PsiDirectoryNode" />
-              <item name="data" type="462c0819:PsiDirectoryNode" />
-              <item name="ppo_runs" type="462c0819:PsiDirectoryNode" />
-              <item name="ppo_bc_train_simple" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="human_aware_rl" type="b2602c69:ProjectViewProjectNode" />
-              <item name="human_aware_rl" type="462c0819:PsiDirectoryNode" />
-              <item name="human_aware_rl" type="462c0819:PsiDirectoryNode" />
-              <item name="data" type="462c0819:PsiDirectoryNode" />
-              <item name="ppo_runs" type="462c0819:PsiDirectoryNode" />
-              <item name="ppo_bc_train_simple" type="462c0819:PsiDirectoryNode" />
-              <item name="seed1887" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="human_aware_rl" type="b2602c69:ProjectViewProjectNode" />
-              <item name="human_aware_rl" type="462c0819:PsiDirectoryNode" />
-              <item name="human_aware_rl" type="462c0819:PsiDirectoryNode" />
-              <item name="data" type="462c0819:PsiDirectoryNode" />
-              <item name="ppo_runs" type="462c0819:PsiDirectoryNode" />
-              <item name="ppo_bc_train_simple" type="462c0819:PsiDirectoryNode" />
-              <item name="seed1887" type="462c0819:PsiDirectoryNode" />
-              <item name="best" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="human_aware_rl" type="b2602c69:ProjectViewProjectNode" />
-              <item name="human_aware_rl" type="462c0819:PsiDirectoryNode" />
-              <item name="human_aware_rl" type="462c0819:PsiDirectoryNode" />
-              <item name="data" type="462c0819:PsiDirectoryNode" />
-              <item name="ppo_runs" type="462c0819:PsiDirectoryNode" />
-              <item name="ppo_bc_train_simple" type="462c0819:PsiDirectoryNode" />
-              <item name="seed1887" type="462c0819:PsiDirectoryNode" />
-              <item name="ppo_agent" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -777,8 +723,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/human_aware_rl/experiments/maml_ppo_experiments.sh">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="19">
-          <caret line="1" selection-start-line="1" selection-end-line="1" />
+        <state>
+          <caret column="189" selection-start-column="189" selection-end-column="189" />
         </state>
       </provider>
     </entry>
@@ -806,7 +752,7 @@
     <entry file="file://$PROJECT_DIR$/baselines/baselines/ppo2/ppo2.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="273">
-          <caret line="135" column="38" lean-forward="true" selection-start-line="135" selection-start-column="38" selection-end-line="135" selection-end-column="38" />
+          <caret line="135" column="38" selection-start-line="135" selection-start-column="38" selection-end-line="135" selection-end-column="38" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
           </folding>
@@ -815,8 +761,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/human_aware_rl/maml/maml_ppo.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="228">
-          <caret line="90" lean-forward="true" selection-start-line="90" selection-end-line="90" />
+        <state relative-caret-position="611">
+          <caret line="53" lean-forward="true" selection-start-line="53" selection-end-line="53" />
           <folding>
             <element signature="e#0#37#0" expanded="true" />
           </folding>

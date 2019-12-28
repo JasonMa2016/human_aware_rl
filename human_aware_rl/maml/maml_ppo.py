@@ -46,7 +46,6 @@ def my_config():
 
     RUN_TYPE = "ppo"
 
--
     # Reduce parameters to be able to run locally to test for simple bugs
     LOCAL_TESTING = True
 
