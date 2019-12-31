@@ -8,7 +8,7 @@ from sacred import Experiment
 from sacred.observers import FileStorageObserver
 from tensorflow.saved_model import simple_save
 
-PPO_DATA_DIR = 'data/ppo_runs_quarters/'
+PPO_DATA_DIR = 'data/ppo_runs/'
 
 ex = Experiment('PPO')
 ex.observers.append(FileStorageObserver.create(PPO_DATA_DIR + 'ppo_exp'))
@@ -35,7 +35,7 @@ def my_config():
     ##################
 
     TIMESTAMP_DIR = True
-    EX_NAME = "ppo_bc_train_simple_jason"
+    EX_NAME = "ppo_bc_train_simple"
 
     if TIMESTAMP_DIR:
         SAVE_DIR = PPO_DATA_DIR + time.strftime('%Y_%m_%d-%H_%M_%S_') + EX_NAME + "/"
@@ -47,7 +47,7 @@ def my_config():
     RUN_TYPE = "ppo"
 
     # Reduce parameters to be able to run locally to test for simple bugs
-    LOCAL_TESTING = True
+    LOCAL_TESTING = False
 
     # Choice among: bc_train, bc_test, sp, hm, rnd
     OTHER_AGENT_TYPE = "bc_train"

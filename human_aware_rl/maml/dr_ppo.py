@@ -47,7 +47,7 @@ def my_config():
     RUN_TYPE = "ppo"
 
     # Reduce parameters to be able to run locally to test for simple bugs
-    LOCAL_TESTING = True
+    LOCAL_TESTING = False
 
     # Choice among: bc_train, bc_test, sp, hm, rnd
     OTHER_AGENT_TYPE = "bc_train"
@@ -207,8 +207,8 @@ def my_config():
         "sim_threads": sim_threads,
         "TOTAL_BATCH_SIZE": TOTAL_BATCH_SIZE,
         "BATCH_SIZE": BATCH_SIZE,
-        "NUM_META_ITERATIONS": NUM_META_ITERATIONS,
-        "META_BATCH_SIZE": META_BATCH_SIZE,
+        # "NUM_META_ITERATIONS": NUM_META_ITERATIONS,
+        # "META_BATCH_SIZE": META_BATCH_SIZE,
         "MAX_GRAD_NORM": MAX_GRAD_NORM,
         "LR": LR,
         "LR_ANNEALING": LR_ANNEALING,
@@ -411,12 +411,12 @@ def ppo_run(params):
             current_agent = bc_agents[index]
             configure_bc_agent(bc_path, current_agent, gym_env, mlp, mdp)
             train_info = update_model(gym_env, meta_model, **params)
-
+	    train_infos.append(train_info) 
 
         # Save model
         save_ppo_model(meta_model, curr_seed_dir + meta_model.agent_name)
         print("Saved training info at", curr_seed_dir + "training_info")
-        save_pickle(train_info, curr_seed_dir + "training_info")
-        train_infos.append(train_info)
+        save_pickle(train_infos, curr_seed_dir + "training_info")
+        # train_infos.append(train_info)
 
     return train_infos
