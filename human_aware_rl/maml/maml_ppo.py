@@ -8,7 +8,7 @@ from sacred import Experiment
 from sacred.observers import FileStorageObserver
 from tensorflow.saved_model import simple_save
 
-PPO_DATA_DIR = 'thesis_data/maml_ppo/'
+PPO_DATA_DIR = '../../thesis_data/maml_ppo/'
 
 ex = Experiment('PPO')
 ex.observers.append(FileStorageObserver.create(PPO_DATA_DIR + 'ppo_exp'))
@@ -90,7 +90,7 @@ def my_config():
     TOTAL_BATCH_SIZE = 12000 if not LOCAL_TESTING else 800
 
     PPO_RUN_TOT_TIMESTEPS = PPO_RUN_TOT_TIMESTEPS // META_FACTOR
-    TOTAL_BATCH_SIZE = TOTAL_BATCH_SIZE // META_FACTOR
+    # TOTAL_BATCH_SIZE = TOTAL_BATCH_SIZE // META_FACTOR
 
     # Number of minibatches we divide up each batch into before
     # performing gradient steps
@@ -98,7 +98,8 @@ def my_config():
 
     # Calculating `batch size` as defined in baselines
     BATCH_SIZE = TOTAL_BATCH_SIZE // sim_threads
-
+    # This is nsteps what the heck is going on
+    # Compare the two
     # Number of gradient steps to perform on each mini-batch
     STEPS_PER_UPDATE = 8 if not LOCAL_TESTING else 1
 

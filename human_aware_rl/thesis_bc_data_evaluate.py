@@ -33,29 +33,29 @@ seeds = [9456]
 ppo_path_half = 'data/ppo_runs_half/'
 ppo_paths = {"half": ppo_path_half}
 
-maml_ppo_path = 'thesis_data/maml_ppo/'
-ppo_paths = {"maml": maml_ppo_path}
+# maml_ppo_path = 'thesis_data/maml_ppo/'
+# ppo_paths = {"maml": maml_ppo_path}
 
 layout_name = 'simple'
 performances = {}
 
 for seed in seeds:
-    # ppo_bc_train_path = 'ppo_bc_train_' + layout_name
-    ppo_bc_train_path = 'maml_ppo_bc_train_' + layout_name
+    ppo_bc_train_path = 'ppo_bc_train_' + layout_name
+    # ppo_bc_train_path = 'maml_ppo_bc_train_' + layout_name
     for model in ppo_paths:
         agent_ppo_bc_train, ppo_config = get_ppo_agent(ppo_paths[model], ppo_bc_train_path, seed, best=False)
         if model not in performances:
             performances[model] = {}
 
 
-        clean_trials = load_pkl('thesis_data/human/anonymized/clean_train_trials.pkl')
+        clean_trials = load_pkl('thesis_data/human/anonymized/clean_test_trials.pkl')
         current_clean_trials = clean_trials[clean_trials['layout_name'] == PYTHON_LAYOUT_NAME_TO_JS_NAME[layout_name]]
         workers = list(current_clean_trials['workerid_num'].unique())
         for worker_idx in workers:
             if worker_idx not in performances[model]:
                 performances[model][worker_idx] = []
             for seed_idx in range(5):
-                agent_name = 'bc_train/seed{}/worker{}/'.format(seed_idx, worker_idx)
+                agent_name = 'bc_test/seed{}/worker{}/'.format(seed_idx, worker_idx)
                 bc_model_path = layout_name + "/" + agent_name 
                 agent_bc_test, bc_params = get_bc_agent_from_saved('thesis_data/bc_runs/', bc_model_path)
                 evaluator = AgentEvaluator(mdp_params=bc_params["mdp_params"], env_params=bc_params["env_params"])
@@ -66,7 +66,7 @@ for seed in seeds:
                 performances[model][worker_idx].append(avg_ppo_and_bc)
 
 
-np.save('thesis_data/test_MAML_PPO_BC_model_simple_train.npy', performances)
+# np.save('thesis_data/test_MAML_PPO_BC_model_simple_train.npy', performances)
 
 for model in performances:
     for worker_idx in performances[model]:
