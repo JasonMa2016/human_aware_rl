@@ -48,7 +48,7 @@ def train_bc_agent_from_hh_data(layout_name, agent_name, worker_id, num_epochs, 
     bc_params["mdp_params"]['layout_name'] = layout_name
     bc_params["mdp_params"]['start_order_list'] = None
 
-    model_save_dir = "thesis_data/bc_runs/"+ layout_name + "/" + agent_name
+    model_save_dir = "thesis_data/bc_runs_500/"+ layout_name + "/" + agent_name
     return train_bc_agent(model_save_dir, bc_params, num_epochs=num_epochs, lr=lr, adam_eps=adam_eps), model_save_dir
 
 def train_bc_models(all_params, seeds):
@@ -75,12 +75,12 @@ def run_all_bc_experiments():
     seeds = [5415, 2652, 6440, 1965, 6647]
     num_seeds = len(seeds)
 
-    params_simple = {"layout_name": "simple", "num_epochs": 40, "lr": 1e-3, "adam_eps":1e-8}
-    params_unident = {"layout_name": "unident_s", "num_epochs": 40, "lr": 1e-3, "adam_eps":1e-8}
-    params_random1 = {"layout_name": "random1", "num_epochs": 40, "lr": 1e-3, "adam_eps":1e-8}
-    params_random0 = {"layout_name": "random0", "num_epochs": 40, "lr": 1e-3, "adam_eps":1e-8}
-    params_random3 = {"layout_name": "random3", "num_epochs": 40, "lr": 1e-3, "adam_eps":1e-8}
-
+    params_simple = {"layout_name": "simple", "num_epochs": 500, "lr": 1e-3, "adam_eps":1e-8}
+    params_unident = {"layout_name": "unident_s", "num_epochs": 500, "lr": 1e-3, "adam_eps":1e-8}
+    params_random1 = {"layout_name": "random1", "num_epochs": 500, "lr": 1e-3, "adam_eps":1e-8}
+    params_random0 = {"layout_name": "random0", "num_epochs": 500, "lr": 1e-3, "adam_eps":1e-8}
+    params_random3 = {"layout_name": "random3", "num_epochs": 500, "lr": 1e-3, "adam_eps":1e-8}
+    # all_params = [params_simple]
     all_params = [params_simple, params_random1, params_unident, params_random0, params_random3]
     train_bc_models(all_params, seeds)
 
@@ -100,23 +100,27 @@ def evaluate_all_bc_models(all_params, num_rounds, num_seeds):
                 bc_models_evaluation[layout_name][model_name][worker_id] = {}
                 total = 0
                 for seed_idx in range(num_seeds):
-                    eval_trajs = eval_with_benchmarking_from_saved(num_rounds, 'thesis_data/bc_runs/', layout_name + "/bc_{}/seed{}/worker{}".format(model_name, seed_idx, worker_id))
-                    bc_models_evaluation[layout_name][model_name][worker_id][seed_idx] = np.mean(eval_trajs['ep_returns'])
-                    total += np.mean(eval_trajs['ep_returns'])
-                bc_models_evaluation[layout_name][model_name][worker_id]['average'] = total / num_seeds
+                    try:
+                        eval_trajs = eval_with_benchmarking_from_saved(num_rounds, 'thesis_data/bc_runs_500/', layout_name + "/bc_{}/seed{}/worker{}".format(model_name, seed_idx, worker_id))
+                        bc_models_evaluation[layout_name][model_name][worker_id][seed_idx] = np.mean(eval_trajs['ep_returns'])
+                        total += np.mean(eval_trajs['ep_returns'])
+                    except:
+                        continue
+                    bc_models_evaluation[layout_name][model_name][worker_id]['average'] = total / num_seeds
     return bc_models_evaluation
 
 if __name__ == '__main__':
-    # run_all_bc_experiments()
-    params_simple = {"layout_name": "simple", "num_epochs": 40, "lr": 1e-3, "adam_eps":1e-8}
-    params_unident = {"layout_name": "unident_s", "num_epochs": 40, "lr": 1e-3, "adam_eps":1e-8}
-    params_random1 = {"layout_name": "random1", "num_epochs": 40, "lr": 1e-3, "adam_eps":1e-8}
-    params_random0 = {"layout_name": "random0", "num_epochs": 40, "lr": 1e-3, "adam_eps":1e-8}
-    params_random3 = {"layout_name": "random3", "num_epochs": 40, "lr": 1e-3, "adam_eps":1e-8}
+    run_all_bc_experiments()
+    # params_simple = {"layout_name": "simple", "num_epochs": 40, "lr": 1e-3, "adam_eps":1e-8}
+    # params_unident = {"layout_name": "unident_s", "num_epochs": 40, "lr": 1e-3, "adam_eps":1e-8}
+    # params_random1 = {"layout_name": "random1", "num_epochs": 40, "lr": 1e-3, "adam_eps":1e-8}
+    # params_random0 = {"layout_name": "random0", "num_epochs": 40, "lr": 1e-3, "adam_eps":1e-8}
+    # params_random3 = {"layout_name": "random3", "num_epochs": 40, "lr": 1e-3, "adam_eps":1e-8}
 
-    all_params = [params_simple, params_random1, params_unident, params_random0, params_random3]
-    num_rounds = 20
-    num_seeds = 5
-    bc_models_evaluation = evaluate_all_bc_models(all_params, num_rounds, num_seeds)
+    # all_params = [params_simple, params_random1, params_unident, params_random0, params_random3]
+    # all_params = [params_simple]
+    # num_rounds = 20
+    # num_seeds = 4
+    # bc_models_evaluation = evaluate_all_bc_models(all_params, num_rounds, num_seeds)
 
     print(bc_models_evaluation)
