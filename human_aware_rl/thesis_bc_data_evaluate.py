@@ -36,7 +36,11 @@ ppo_paths = {"half": ppo_path_half}
 # maml_ppo_path = 'thesis_data/maml_ppo/'
 # ppo_paths = {"maml": maml_ppo_path}
 
+dr_ppo_path = 'thesis_data/dr_ppo/'
+ppo_paths = {"dr": dr_ppo_path}
 layout_name = 'simple'
+bc_mode = 'train'
+
 performances = {}
 
 for seed in seeds:
@@ -48,14 +52,14 @@ for seed in seeds:
             performances[model] = {}
 
 
-        clean_trials = load_pkl('thesis_data/human/anonymized/clean_test_trials.pkl')
+        clean_trials = load_pkl('thesis_data/human/anonymized/clean_{}_trials.pkl'.format(bc_mode))
         current_clean_trials = clean_trials[clean_trials['layout_name'] == PYTHON_LAYOUT_NAME_TO_JS_NAME[layout_name]]
         workers = list(current_clean_trials['workerid_num'].unique())
         for worker_idx in workers:
             if worker_idx not in performances[model]:
                 performances[model][worker_idx] = []
             for seed_idx in range(5):
-                agent_name = 'bc_test/seed{}/worker{}/'.format(seed_idx, worker_idx)
+                agent_name = 'bc_{}/seed{}/worker{}/'.format(bc_mode, seed_idx, worker_idx)
                 bc_model_path = layout_name + "/" + agent_name 
                 agent_bc_test, bc_params = get_bc_agent_from_saved('thesis_data/bc_runs/', bc_model_path)
                 evaluator = AgentEvaluator(mdp_params=bc_params["mdp_params"], env_params=bc_params["env_params"])

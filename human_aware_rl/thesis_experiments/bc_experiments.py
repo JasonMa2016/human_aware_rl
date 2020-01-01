@@ -84,6 +84,39 @@ def run_all_bc_experiments():
     all_params = [params_simple, params_random1, params_unident, params_random0, params_random3]
     train_bc_models(all_params, seeds)
 
+def evaluate_all_bc_models(all_params, num_rounds, num_seeds):
+    """Evaluate all trained models"""
+    models = ['train', 'test']
+    bc_models_evaluation = {}
+    for params in all_params:
+        layout_name = params['layout_name']
+        print(layout_name)
+        bc_models_evaluation[layout_name] = { "train": {}, "test": {} }
+        for model_name in models:
+            clean_trials = load_pkl('thesis_data/human/anonymized/clean_{}_trials.pkl'.format(model_name))
+            current_clean_trials = clean_trials[clean_trials['layout_name'] == PYTHON_LAYOUT_NAME_TO_JS_NAME[params['layout_name']]]
+            workers = list(current_clean_trials['workerid_num'].unique())
+            for worker_id in workers:
+                bc_models_evaluation[layout_name][model_name][worker_id] = {}
+                total = 0
+                for seed_idx in range(num_seeds):
+                    eval_trajs = eval_with_benchmarking_from_saved(num_rounds, 'thesis_data/bc_runs/', layout_name + "/bc_{}/seed{}/worker{}".format(model_name, seed_idx, worker_id))
+                    bc_models_evaluation[layout_name][model_name][worker_id][seed_idx] = np.mean(eval_trajs['ep_returns'])
+                    total += np.mean(eval_trajs['ep_returns'])
+                bc_models_evaluation[layout_name][model_name][worker_id]['average'] = total / num_seeds
+    return bc_models_evaluation
 
 if __name__ == '__main__':
-    run_all_bc_experiments()
+    # run_all_bc_experiments()
+    params_simple = {"layout_name": "simple", "num_epochs": 40, "lr": 1e-3, "adam_eps":1e-8}
+    params_unident = {"layout_name": "unident_s", "num_epochs": 40, "lr": 1e-3, "adam_eps":1e-8}
+    params_random1 = {"layout_name": "random1", "num_epochs": 40, "lr": 1e-3, "adam_eps":1e-8}
+    params_random0 = {"layout_name": "random0", "num_epochs": 40, "lr": 1e-3, "adam_eps":1e-8}
+    params_random3 = {"layout_name": "random3", "num_epochs": 40, "lr": 1e-3, "adam_eps":1e-8}
+
+    all_params = [params_simple, params_random1, params_unident, params_random0, params_random3]
+    num_rounds = 20
+    num_seeds = 5
+    bc_models_evaluation = evaluate_all_bc_models(all_params, num_rounds, num_seeds)
+
+    print(bc_models_evaluation)

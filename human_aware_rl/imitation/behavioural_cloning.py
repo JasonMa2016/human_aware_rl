@@ -125,8 +125,8 @@ def eval_with_benchmarking_from_model(n_games, model, bc_params, no_waits, displ
     trajectories = a_eval.evaluate_agent_pair(ap, num_games=n_games, display=display)
     return trajectories
 
-def eval_with_benchmarking_from_saved(n_games, model_name, no_waits=False, display=False):
-    model, bc_params = load_bc_model_from_path(model_name)
+def eval_with_benchmarking_from_saved(n_games, bc_save_dir, model_name, no_waits=False, display=False):
+    model, bc_params = load_bc_model_from_path(bc_save_dir, model_name)
     return eval_with_benchmarking_from_model(n_games, model, bc_params, no_waits, display=display)
 
 def load_bc_model_from_path(bc_save_dir, model_name):

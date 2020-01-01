@@ -1,0 +1,1923 @@
+INFO - PPO - Running command 'ppo_run'
+INFO - PPO - Started run with ID "1"
+Creating env with params {'RUN_TYPE': 'ppo', 'SEEDS': [9456], 'LOCAL_TESTING': True, 'EX_NAME': 'ppo_bc_train_simple', 'SAVE_DIR': '../../thesis_data/dr_ppo/ppo_bc_train_simple/', 'GPU_ID': 0, 'NUM_AGENTS': 10, 'PPO_RUN_TOT_TIMESTEPS': 8000000.0, 'mdp_params': {'layout_name': 'simple', 'start_order_list': None, 'rew_shaping_params': {'PLACEMENT_IN_POT_REW': 3, 'DISH_PICKUP_REWARD': 3, 'SOUP_PICKUP_REWARD': 5, 'DISH_DISP_DISTANCE_REW': 0, 'POT_DISTANCE_REW': 0, 'SOUP_DISTANCE_REW': 0}}, 'env_params': {'horizon': 400}, 'mdp_generation_params': {'padded_mdp_shape': [11, 7], 'mdp_shape_fn': [[5, 11], [5, 7]], 'prop_empty_fn': [0.6, 1], 'prop_feats_fn': [0, 0.6]}, 'ENTROPY': 0.1, 'GAMMA': 0.99, 'sim_threads': 2, 'TOTAL_BATCH_SIZE': 800, 'BATCH_SIZE': 400, 'MAX_GRAD_NORM': 0.1, 'LR': 0.001, 'LR_ANNEALING': 3, 'VF_COEF': 0.5, 'STEPS_PER_UPDATE': 1, 'MINIBATCHES': 10, 'CLIPPING': 0.05, 'LAM': 0.98, 'SELF_PLAY_HORIZON': [500000.0, 3000000.0], 'REW_SHAPING_HORIZON': 1000000.0, 'OTHER_AGENT_TYPE': 'bc_train', 'HM_PARAMS': [True, 0.3], 'NUM_HIDDEN_LAYERS': 3, 'SIZE_HIDDEN_LAYERS': 64, 'NUM_FILTERS': 25, 'NUM_CONV_LAYERS': 3, 'NETWORK_TYPE': 'conv_and_mlp', 'SAVE_BEST_THRESH': 50, 'TRAJECTORY_SELF_PLAY': True, 'VIZ_FREQUENCY': 10, 'grad_updates_per_agent': 100000.0}
+Computing MediumLevelPlanner to be saved in /home/ubuntu/human_aware_rl/overcooked_ai/overcooked_ai_py/data/planners/simple_am.pkl
+It took 0.20538568496704102 seconds to create mlp
+self_play_randomization: 1
+trajectory_sp: True
+LOADING BC MODEL FROM: seed0/worker1
+Loading a model without an environment, this model cannot be trained until it has a valid environment.
+WARNING:tensorflow:From /home/ubuntu/anaconda3/envs/harl/lib/python3.7/site-packages/tensorflow/python/framework/op_def_library.py:263: colocate_with (from tensorflow.python.framework.ops) is deprecated and will be removed in a future version.
+Instructions for updating:
+Colocations handled automatically by placer.
+WARNING - tensorflow - From /home/ubuntu/anaconda3/envs/harl/lib/python3.7/site-packages/tensorflow/python/framework/op_def_library.py:263: colocate_with (from tensorflow.python.framework.ops) is deprecated and will be removed in a future version.
+Instructions for updating:
+Colocations handled automatically by placer.
+WARNING:tensorflow:From /home/ubuntu/human_aware_rl/stable-baselines/stable_baselines/common/policies.py:436: flatten (from tensorflow.python.layers.core) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use keras.layers.flatten instead.
+WARNING - tensorflow - From /home/ubuntu/human_aware_rl/stable-baselines/stable_baselines/common/policies.py:436: flatten (from tensorflow.python.layers.core) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use keras.layers.flatten instead.
+WARNING:tensorflow:From /home/ubuntu/anaconda3/envs/harl/lib/python3.7/site-packages/tensorflow/python/ops/math_ops.py:3066: to_int32 (from tensorflow.python.ops.math_ops) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use tf.cast instead.
+WARNING - tensorflow - From /home/ubuntu/anaconda3/envs/harl/lib/python3.7/site-packages/tensorflow/python/ops/math_ops.py:3066: to_int32 (from tensorflow.python.ops.math_ops) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use tf.cast instead.
+WARNING:tensorflow:From /home/ubuntu/anaconda3/envs/harl/lib/python3.7/site-packages/tensorflow/python/ops/math_grad.py:102: div (from tensorflow.python.ops.math_ops) is deprecated and will be removed in a future version.
+Instructions for updating:
+Deprecated in favor of operator or tf.math.divide.
+WARNING - tensorflow - From /home/ubuntu/anaconda3/envs/harl/lib/python3.7/site-packages/tensorflow/python/ops/math_grad.py:102: div (from tensorflow.python.ops.math_ops) is deprecated and will be removed in a future version.
+Instructions for updating:
+Deprecated in favor of operator or tf.math.divide.
+Mlp with different params or mdp found, computing from scratch
+Computing MediumLevelPlanner to be saved in /home/ubuntu/human_aware_rl/overcooked_ai/overcooked_ai_py/data/planners/simple_am.pkl
+It took 0.20203113555908203 seconds to create mlp
+WARNING:tensorflow:From /home/ubuntu/human_aware_rl/baselines/baselines/common/input.py:57: to_float (from tensorflow.python.ops.math_ops) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use tf.cast instead.
+WARNING - tensorflow - From /home/ubuntu/human_aware_rl/baselines/baselines/common/input.py:57: to_float (from tensorflow.python.ops.math_ops) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use tf.cast instead.
+(2, 5, 4, 20)
+WARNING:tensorflow:From /home/ubuntu/human_aware_rl/human_aware_rl/baselines_utils.py:127: conv2d (from tensorflow.python.layers.convolutional) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use keras.layers.conv2d instead.
+WARNING - tensorflow - From /home/ubuntu/human_aware_rl/human_aware_rl/baselines_utils.py:127: conv2d (from tensorflow.python.layers.convolutional) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use keras.layers.conv2d instead.
+WARNING:tensorflow:From /home/ubuntu/human_aware_rl/human_aware_rl/baselines_utils.py:143: dense (from tensorflow.python.layers.core) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use keras.layers.dense instead.
+WARNING - tensorflow - From /home/ubuntu/human_aware_rl/human_aware_rl/baselines_utils.py:143: dense (from tensorflow.python.layers.core) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use keras.layers.dense instead.
+Last layer conv network output shape (2, 64)
+(80, 5, 4, 20)
+Last layer conv network output shape (80, 64)
+TOT NUM UPDATES 0
+LOADING BC MODEL FROM: seed4/worker11
+Loading a model without an environment, this model cannot be trained until it has a valid environment.
+Loaded MediumLevelPlanner from /home/ubuntu/human_aware_rl/overcooked_ai/overcooked_ai_py/data/planners/simple_am.pkl
+TOT NUM UPDATES 1000
+SP envs: 2/2
+Other agent actions took 0.5220518112182617 seconds
+Total simulation time for 400 steps: 4.94295859336853 	 Other agent action time: 0 	 80.92319456947095 steps/s
+Curr learning rate 0.001 	 Curr reward per step 0.02875
+
+0/1:   0%|          | 0/10 [00:00<?, ?it/s]
+0/1:  10%|█         | 1/10 [00:00<00:01,  8.39it/s]
+0/1: 100%|██████████| 10/10 [00:00<00:00, 64.02it/s]
+Logging to /tmp/openai-2019-12-31-15-51-45-115434
+--------------------------------------
+| approxkl           | 3.9072533e-05 |
+| clipfrac           | 0.0           |
+| eplenmean          | 400           |
+| eprewmean          | 11.5          |
+| explained_variance | 0.00198       |
+| fps                | 156           |
+| nupdates           | 1             |
+| policy_entropy     | 1.7917204     |
+| policy_loss        | 0.00019947179 |
+| serial_timesteps   | 400           |
+| time_elapsed       | 5.12          |
+| time_remaining     | 85.3          |
+| total_timesteps    | 800           |
+| true_eprew         | 0             |
+| value_loss         | 0.9698103     |
+--------------------------------------
+Current reward shaping 0.9992
+Current self-play randomization 1
+SP envs: 2/2
+Other agent actions took 0.5461163520812988 seconds
+Total simulation time for 400 steps: 1.3987603187561035 	 Other agent action time: 0 	 285.9675061097772 steps/s
+Curr learning rate 0.0009993333333333334 	 Curr reward per step 0.014988
+
+0/1:   0%|          | 0/10 [00:00<?, ?it/s]
+0/1: 100%|██████████| 10/10 [00:00<00:00, 219.58it/s]
+---------------------------------------
+| approxkl           | 1.9256402e-05  |
+| clipfrac           | 0.0            |
+| eplenmean          | 400            |
+| eprewmean          | 8.75           |
+| explained_variance | -0.00562       |
+| fps                | 550            |
+| nupdates           | 2              |
+| policy_entropy     | 1.7916749      |
+| policy_loss        | -0.00023765056 |
+| serial_timesteps   | 800            |
+| time_elapsed       | 6.58           |
+| time_remaining     | 54.7           |
+| total_timesteps    | 1600           |
+| true_eprew         | 0              |
+| value_loss         | 0.38988963     |
+---------------------------------------
+Current reward shaping 0.9984
+Current self-play randomization 1
+SP envs: 2/2
+Other agent actions took 0.5298707485198975 seconds
+Total simulation time for 400 steps: 1.3707702159881592 	 Other agent action time: 0 	 291.80674874209205 steps/s
+Curr learning rate 0.0009986666666666668 	 Curr reward per step 0.011231999999999999
+
+0/1:   0%|          | 0/10 [00:00<?, ?it/s]
+0/1: 100%|██████████| 10/10 [00:00<00:00, 245.66it/s]
+---------------------------------------
+| approxkl           | 2.0596253e-05  |
+| clipfrac           | 0.0            |
+| eplenmean          | 400            |
+| eprewmean          | 7.33           |
+| explained_variance | 0.00604        |
+| fps                | 563            |
+| nupdates           | 3              |
+| policy_entropy     | 1.7915008      |
+| policy_loss        | -9.7225675e-06 |
+| serial_timesteps   | 1200           |
+| time_elapsed       | 8              |
+| time_remaining     | 44.3           |
+| total_timesteps    | 2400           |
+| true_eprew         | 0              |
+| value_loss         | 0.27596843     |
+---------------------------------------
+Current reward shaping 0.9976
+Current self-play randomization 1
+SP envs: 2/2
+Other agent actions took 0.5003368854522705 seconds
+Total simulation time for 400 steps: 1.3119032382965088 	 Other agent action time: 0 	 304.90053559086823 steps/s
+Curr learning rate 0.000998 	 Curr reward per step 0.018705
+
+0/1:   0%|          | 0/10 [00:00<?, ?it/s]
+0/1: 100%|██████████| 10/10 [00:00<00:00, 249.88it/s]
+--------------------------------------
+| approxkl           | 8.18711e-05   |
+| clipfrac           | 0.0           |
+| eplenmean          | 400           |
+| eprewmean          | 7.37          |
+| explained_variance | 0.0874        |
+| fps                | 588           |
+| nupdates           | 4             |
+| policy_entropy     | 1.7910312     |
+| policy_loss        | 0.00079581887 |
+| serial_timesteps   | 1600          |
+| time_elapsed       | 9.36          |
+| time_remaining     | 38.8          |
+| total_timesteps    | 3200          |
+| true_eprew         | 0             |
+| value_loss         | 0.43345404    |
+--------------------------------------
+Current reward shaping 0.9968
+Current self-play randomization 1
+SP envs: 2/2
+Other agent actions took 0.5109853744506836 seconds
+Total simulation time for 400 steps: 1.325021505355835 	 Other agent action time: 0 	 301.8818927716799 steps/s
+Curr learning rate 0.0009973333333333334 	 Curr reward per step 0.026166000000000002
+
+0/1:   0%|          | 0/10 [00:00<?, ?it/s]
+0/1: 100%|██████████| 10/10 [00:00<00:00, 242.30it/s]
+--------------------------------------
+| approxkl           | 5.4925447e-05 |
+| clipfrac           | 0.0           |
+| eplenmean          | 400           |
+| eprewmean          | 7.99          |
+| explained_variance | 0.198         |
+| fps                | 581           |
+| nupdates           | 5             |
+| policy_entropy     | 1.7910326     |
+| policy_loss        | 0.00026213183 |
+| serial_timesteps   | 2000          |
+| time_elapsed       | 10.7          |
+| time_remaining     | 35.6          |
+| total_timesteps    | 4000          |
+| true_eprew         | 0             |
+| value_loss         | 0.8670411     |
+--------------------------------------
+Current reward shaping 0.996
+Current self-play randomization 1
+SP envs: 2/2
+Other agent actions took 0.5103888511657715 seconds
+Total simulation time for 400 steps: 1.3250181674957275 	 Other agent action time: 0 	 301.8826532439147 steps/s
+Curr learning rate 0.0009966666666666668 	 Curr reward per step 0.018675
+
+0/1:   0%|          | 0/10 [00:00<?, ?it/s]
+0/1: 100%|██████████| 10/10 [00:00<00:00, 242.24it/s]
+-------------------------------------
+| approxkl           | 2.640174e-05 |
+| clipfrac           | 0.0          |
+| eplenmean          | 400          |
+| eprewmean          | 7.9          |
+| explained_variance | 0.0272       |
+| fps                | 581          |
+| nupdates           | 6            |
+| policy_entropy     | 1.7906446    |
+| policy_loss        | 6.417707e-05 |
+| serial_timesteps   | 2400         |
+| time_elapsed       | 12.1         |
+| time_remaining     | 33.4         |
+| total_timesteps    | 4800         |
+| true_eprew         | 0            |
+| value_loss         | 0.3481226    |
+-------------------------------------
+Current reward shaping 0.9952
+Current self-play randomization 1
+SP envs: 2/2
+Other agent actions took 0.5073192119598389 seconds
+Total simulation time for 400 steps: 1.3408985137939453 	 Other agent action time: 0 	 298.3074378002239 steps/s
+Curr learning rate 0.0009960000000000001 	 Curr reward per step 0.022392
+
+0/1:   0%|          | 0/10 [00:00<?, ?it/s]
+0/1: 100%|██████████| 10/10 [00:00<00:00, 248.62it/s]
+---------------------------------------
+| approxkl           | 0.00012175605  |
+| clipfrac           | 0.01           |
+| eplenmean          | 400            |
+| eprewmean          | 8.05           |
+| explained_variance | 0.291          |
+| fps                | 575            |
+| nupdates           | 7              |
+| policy_entropy     | 1.7904708      |
+| policy_loss        | -0.00044975616 |
+| serial_timesteps   | 2800           |
+| time_elapsed       | 13.5           |
+| time_remaining     | 31.9           |
+| total_timesteps    | 5600           |
+| true_eprew         | 0              |
+| value_loss         | 0.5058316      |
+---------------------------------------
+Current reward shaping 0.9944
+Current self-play randomization 1
+SP envs: 2/2
+Other agent actions took 0.5271275043487549 seconds
+Total simulation time for 400 steps: 1.3860740661621094 	 Other agent action time: 0 	 288.58486697435814 steps/s
+Curr learning rate 0.0009953333333333333 	 Curr reward per step 0.017402
+
+0/1:   0%|          | 0/10 [00:00<?, ?it/s]
+0/1: 100%|██████████| 10/10 [00:00<00:00, 244.60it/s]
+---------------------------------------
+| approxkl           | 3.5356905e-05  |
+| clipfrac           | 0.0            |
+| eplenmean          | 400            |
+| eprewmean          | 7.92           |
+| explained_variance | -0.171         |
+| fps                | 557            |
+| nupdates           | 8              |
+| policy_entropy     | 1.790234       |
+| policy_loss        | -0.00021586867 |
+| serial_timesteps   | 3200           |
+| time_elapsed       | 14.9           |
+| time_remaining     | 30.9           |
+| total_timesteps    | 6400           |
+| true_eprew         | 0              |
+| value_loss         | 0.6395724      |
+---------------------------------------
+Current reward shaping 0.9936
+Current self-play randomization 1
+SP envs: 2/2
+Other agent actions took 0.5026769638061523 seconds
+Total simulation time for 400 steps: 1.334730863571167 	 Other agent action time: 0 	 299.68588493546304 steps/s
+Curr learning rate 0.0009946666666666667 	 Curr reward per step 0.04984
+
+0/1:   0%|          | 0/10 [00:00<?, ?it/s]
+0/1: 100%|██████████| 10/10 [00:00<00:00, 246.47it/s]
+--------------------------------------
+| approxkl           | 0.00016710468 |
+| clipfrac           | 0.02          |
+| eplenmean          | 400           |
+| eprewmean          | 9.25          |
+| explained_variance | 0.0256        |
+| fps                | 577           |
+| nupdates           | 9             |
+| policy_entropy     | 1.7892907     |
+| policy_loss        | -0.0004301627 |
+| serial_timesteps   | 3600          |
+| time_elapsed       | 16.3          |
+| time_remaining     | 30            |
+| total_timesteps    | 7200          |
+| true_eprew         | 1.11          |
+| value_loss         | 6.1866713     |
+--------------------------------------
+Current reward shaping 0.9928
+Current self-play randomization 1
+SP envs: 2/2
+Other agent actions took 0.5054707527160645 seconds
+Total simulation time for 400 steps: 1.3326010704040527 	 Other agent action time: 0 	 300.16484969407804 steps/s
+Curr learning rate 0.000994 	 Curr reward per step 0.022338
+
+0/1:   0%|          | 0/10 [00:00<?, ?it/s]
+0/1: 100%|██████████| 10/10 [00:00<00:00, 246.62it/s]
+--------------------------------------
+| approxkl           | 0.00039226896 |
+| clipfrac           | 0.09875       |
+| eplenmean          | 400           |
+| eprewmean          | 9.22          |
+| explained_variance | 0.182         |
+| fps                | 578           |
+| nupdates           | 10            |
+| policy_entropy     | 1.7872368     |
+| policy_loss        | 0.0006828502  |
+| serial_timesteps   | 4000          |
+| time_elapsed       | 17.7          |
+| time_remaining     | 29.2          |
+| total_timesteps    | 8000          |
+| true_eprew         | 1             |
+| value_loss         | 0.6884652     |
+--------------------------------------
+Current reward shaping 0.992
+Current self-play randomization 1
+../../thesis_data/dr_ppo/ppo_bc_train_simple/
+PPO agent on index 0:
+X X P X X 
+O     ↑1O 
+X ↑0    X 
+X D X S X 
+
+Timestep: 1
+Joint action taken: ('←', 'stay') 	 Reward: 0 + shape * 0 
+X X P X X 
+O     ↑1O 
+X ←0    X 
+X D X S X 
+
+
+Timestep: 2
+Joint action taken: ('→', 'stay') 	 Reward: 0 + shape * 0 
+X X P X X 
+O     ↑1O 
+X   →0  X 
+X D X S X 
+
+
+Timestep: 3
+Joint action taken: ('interact', 'stay') 	 Reward: 0 + shape * 0 
+X X P X X 
+O     ↑1O 
+X   →0  X 
+X D X S X 
+
+
+Timestep: 4
+Joint action taken: ('interact', 'stay') 	 Reward: 0 + shape * 0 
+X X P X X 
+O     ↑1O 
+X   →0  X 
+X D X S X 
+
+
+Timestep: 5
+Joint action taken: ('↓', '→') 	 Reward: 0 + shape * 0 
+X X P X X 
+O     →1O 
+X   ↓0  X 
+X D X S X 
+
+
+Timestep: 6
+Joint action taken: ('↑', 'stay') 	 Reward: 0 + shape * 0 
+X X P X X 
+O   ↑0→1O 
+X       X 
+X D X S X 
+
+
+Timestep: 7
+Joint action taken: ('↑', 'interact') 	 Reward: 0 + shape * 0 
+X X P X X 
+O   ↑0→oO 
+X       X 
+X D X S X 
+
+
+Timestep: 8
+Joint action taken: ('interact', 'stay') 	 Reward: 0 + shape * 0 
+X X P X X 
+O   ↑0→oO 
+X       X 
+X D X S X 
+
+
+Timestep: 9
+Joint action taken: ('↓', '←') 	 Reward: 0 + shape * 0 
+X X P X X 
+O   ←o  O 
+X   ↓0  X 
+X D X S X 
+
+
+Timestep: 10
+Joint action taken: ('←', '↑') 	 Reward: 0 + shape * 0 
+X X P X X 
+O   ↑o  O 
+X ←0    X 
+X D X S X 
+
+
+Timestep: 11
+Joint action taken: ('↑', 'stay') 	 Reward: 0 + shape * 0 
+X X P X X 
+O ↑0↑o  O 
+X       X 
+X D X S X 
+
+
+Timestep: 12
+Joint action taken: ('↑', 'stay') 	 Reward: 0 + shape * 0 
+X X P X X 
+O ↑0↑o  O 
+X       X 
+X D X S X 
+
+
+Timestep: 13
+Joint action taken: ('↓', 'stay') 	 Reward: 0 + shape * 0 
+X X P X X 
+O   ↑o  O 
+X ↓0    X 
+X D X S X 
+
+
+Timestep: 14
+Joint action taken: ('interact', '↑') 	 Reward: 0 + shape * 0 
+X X P X X 
+O   ↑o  O 
+X ↓d    X 
+X D X S X 
+
+
+Timestep: 15
+Joint action taken: ('stay', '←') 	 Reward: 0 + shape * 0 
+X X P X X 
+O ←o    O 
+X ↓d    X 
+X D X S X 
+
+
+Timestep: 16
+Joint action taken: ('→', '→') 	 Reward: 0 + shape * 0 
+X X P X X 
+O   →o  O 
+X   →d  X 
+X D X S X 
+
+
+Timestep: 17
+Joint action taken: ('→', '↑') 	 Reward: 0 + shape * 0 
+X X P X X 
+O   ↑o  O 
+X     →dX 
+X D X S X 
+
+
+Timestep: 18
+Joint action taken: ('→', 'stay') 	 Reward: 0 + shape * 0 
+X X P X X 
+O   ↑o  O 
+X     →dX 
+X D X S X 
+
+
+Timestep: 19
+Joint action taken: ('→', 'stay') 	 Reward: 0 + shape * 0 
+X X P X X 
+O   ↑o  O 
+X     →dX 
+X D X S X 
+
+
+Timestep: 20
+Joint action taken: ('↓', 'stay') 	 Reward: 0 + shape * 0 
+X X P X X 
+O   ↑o  O 
+X     ↓dX 
+X D X S X 
+
+
+Timestep: 21
+Joint action taken: ('↓', '←') 	 Reward: 0 + shape * 0 
+X X P X X 
+O ←o    O 
+X     ↓dX 
+X D X S X 
+
+
+Timestep: 22
+Joint action taken: ('←', 'stay') 	 Reward: 0 + shape * 0 
+X X P X X 
+O ←o    O 
+X   ←d  X 
+X D X S X 
+
+
+Timestep: 23
+Joint action taken: ('↑', 'stay') 	 Reward: 0 + shape * 0 
+X X P X X 
+O ←o↑d  O 
+X       X 
+X D X S X 
+
+
+Timestep: 24
+Joint action taken: ('stay', 'stay') 	 Reward: 0 + shape * 0 
+X X P X X 
+O ←o↑d  O 
+X       X 
+X D X S X 
+
+
+Timestep: 25
+Joint action taken: ('interact', 'interact') 	 Reward: 0 + shape * 0 
+X X P X X 
+O ←o↑d  O 
+X       X 
+X D X S X 
+
+
+Timestep: 26
+Joint action taken: ('stay', '→') 	 Reward: 0 + shape * 0 
+X X P X X 
+O →o↑d  O 
+X       X 
+X D X S X 
+
+
+Timestep: 27
+Joint action taken: ('interact', 'stay') 	 Reward: 0 + shape * 0 
+X X P X X 
+O →o↑d  O 
+X       X 
+X D X S X 
+
+
+Timestep: 28
+Joint action taken: ('stay', 'stay') 	 Reward: 0 + shape * 0 
+X X P X X 
+O →o↑d  O 
+X       X 
+X D X S X 
+
+
+Timestep: 29
+Joint action taken: ('stay', 'stay') 	 Reward: 0 + shape * 0 
+X X P X X 
+O →o↑d  O 
+X       X 
+X D X S X 
+
+
+Timestep: 30
+Joint action taken: ('→', '→') 	 Reward: 0 + shape * 0 
+X X P X X 
+O   →o→dO 
+X       X 
+X D X S X 
+
+
+Timestep: 31
+Joint action taken: ('→', '↑') 	 Reward: 0 + shape * 0 
+X X P X X 
+O   ↑o→dO 
+X       X 
+X D X S X 
+
+
+Timestep: 32
+Joint action taken: ('interact', '→') 	 Reward: 0 + shape * 0 
+X X P X X 
+O   →o→dO 
+X       X 
+X D X S X 
+
+
+Timestep: 33
+Joint action taken: ('↑', 'interact') 	 Reward: 0 + shape * 0 
+X X P X X 
+O   →o↑dO 
+X       X 
+X D X S X 
+
+
+Timestep: 34
+Joint action taken: ('stay', 'stay') 	 Reward: 0 + shape * 0 
+X X P X X 
+O   →o↑dO 
+X       X 
+X D X S X 
+
+
+Timestep: 35
+Joint action taken: ('stay', 'stay') 	 Reward: 0 + shape * 0 
+X X P X X 
+O   →o↑dO 
+X       X 
+X D X S X 
+
+
+Timestep: 36
+Joint action taken: ('interact', '↑') 	 Reward: 0 + shape * 0 
+X X P XdX 
+O   ↑o↑0O 
+X       X 
+X D X S X 
+
+
+Timestep: 37
+Joint action taken: ('↑', 'stay') 	 Reward: 0 + shape * 0 
+X X P XdX 
+O   ↑o↑0O 
+X       X 
+X D X S X 
+
+
+Timestep: 38
+Joint action taken: ('↑', '→') 	 Reward: 0 + shape * 0 
+X X P XdX 
+O   →o↑0O 
+X       X 
+X D X S X 
+
+
+Timestep: 39
+Joint action taken: ('↑', 'stay') 	 Reward: 0 + shape * 0 
+X X P XdX 
+O   →o↑0O 
+X       X 
+X D X S X 
+
+
+Timestep: 40
+Joint action taken: ('↑', 'stay') 	 Reward: 0 + shape * 0 
+X X P XdX 
+O   →o↑0O 
+X       X 
+X D X S X 
+
+
+Timestep: 41
+Joint action taken: ('stay', 'stay') 	 Reward: 0 + shape * 0 
+X X P XdX 
+O   →o↑0O 
+X       X 
+X D X S X 
+
+
+Timestep: 42
+Joint action taken: ('←', '↑') 	 Reward: 0 + shape * 0 
+X X P XdX 
+O   ↑o←0O 
+X       X 
+X D X S X 
+
+
+Timestep: 43
+Joint action taken: ('↓', 'stay') 	 Reward: 0 + shape * 0 
+X X P XdX 
+O   ↑o  O 
+X     ↓0X 
+X D X S X 
+
+
+Timestep: 44
+Joint action taken: ('stay', 'stay') 	 Reward: 0 + shape * 0 
+X X P XdX 
+O   ↑o  O 
+X     ↓0X 
+X D X S X 
+
+
+Timestep: 45
+Joint action taken: ('←', 'stay') 	 Reward: 0 + shape * 0 
+X X P XdX 
+O   ↑o  O 
+X   ←0  X 
+X D X S X 
+
+
+Timestep: 46
+Joint action taken: ('↑', 'interact') 	 Reward: 0 + shape * 3 
+X X ø-XdX 
+O   ↑1  O 
+X   ↑0  X 
+X D X S X 
+
+
+Timestep: 47
+Joint action taken: ('stay', '→') 	 Reward: 0 + shape * 0 
+X X ø-XdX 
+O     →1O 
+X   ↑0  X 
+X D X S X 
+
+
+Timestep: 48
+Joint action taken: ('interact', 'interact') 	 Reward: 0 + shape * 0 
+X X ø-XdX 
+O     →oO 
+X   ↑0  X 
+X D X S X 
+
+
+Timestep: 49
+Joint action taken: ('interact', '→') 	 Reward: 0 + shape * 0 
+X X ø-XdX 
+O     →oO 
+X   ↑0  X 
+X D X S X 
+
+
+Timestep: 50
+Joint action taken: ('interact', 'stay') 	 Reward: 0 + shape * 0 
+X X ø-XdX 
+O     →oO 
+X   ↑0  X 
+X D X S X 
+
+
+Timestep: 51
+Joint action taken: ('stay', '↑') 	 Reward: 0 + shape * 0 
+X X ø-XdX 
+O     ↑oO 
+X   ↑0  X 
+X D X S X 
+
+
+Timestep: 52
+Joint action taken: ('stay', 'stay') 	 Reward: 0 + shape * 0 
+X X ø-XdX 
+O     ↑oO 
+X   ↑0  X 
+X D X S X 
+
+
+Timestep: 53
+Joint action taken: ('interact', 'stay') 	 Reward: 0 + shape * 0 
+X X ø-XdX 
+O     ↑oO 
+X   ↑0  X 
+X D X S X 
+
+
+Timestep: 54
+Joint action taken: ('↓', 'stay') 	 Reward: 0 + shape * 0 
+X X ø-XdX 
+O     ↑oO 
+X   ↓0  X 
+X D X S X 
+
+
+Timestep: 55
+Joint action taken: ('→', '←') 	 Reward: 0 + shape * 0 
+X X ø-XdX 
+O   ←o  O 
+X     →0X 
+X D X S X 
+
+
+Timestep: 56
+Joint action taken: ('stay', '↑') 	 Reward: 0 + shape * 0 
+X X ø-XdX 
+O   ↑o  O 
+X     →0X 
+X D X S X 
+
+
+Timestep: 57
+Joint action taken: ('stay', 'stay') 	 Reward: 0 + shape * 0 
+X X ø-XdX 
+O   ↑o  O 
+X     →0X 
+X D X S X 
+
+
+Timestep: 58
+Joint action taken: ('→', 'stay') 	 Reward: 0 + shape * 0 
+X X ø-XdX 
+O   ↑o  O 
+X     →0X 
+X D X S X 
+
+
+Timestep: 59
+Joint action taken: ('←', 'stay') 	 Reward: 0 + shape * 0 
+X X ø-XdX 
+O   ↑o  O 
+X   ←0  X 
+X D X S X 
+
+
+Timestep: 60
+Joint action taken: ('↑', 'interact') 	 Reward: 0 + shape * 3 
+X X ø=XdX 
+O   ↑1  O 
+X   ↑0  X 
+X D X S X 
+
+
+Timestep: 61
+Joint action taken: ('interact', '↓') 	 Reward: 0 + shape * 0 
+X X ø=XdX 
+O   ↓1  O 
+X   ↑0  X 
+X D X S X 
+
+
+Timestep: 62
+Joint action taken: ('←', 'stay') 	 Reward: 0 + shape * 0 
+X X ø=XdX 
+O   ↓1  O 
+X ←0    X 
+X D X S X 
+
+
+Timestep: 63
+Joint action taken: ('←', 'stay') 	 Reward: 0 + shape * 0 
+X X ø=XdX 
+O   ↓1  O 
+X ←0    X 
+X D X S X 
+
+
+Timestep: 64
+Joint action taken: ('←', 'stay') 	 Reward: 0 + shape * 0 
+X X ø=XdX 
+O   ↓1  O 
+X ←0    X 
+X D X S X 
+
+
+Timestep: 65
+Joint action taken: ('interact', '→') 	 Reward: 0 + shape * 0 
+X X ø=XdX 
+O     →1O 
+X ←0    X 
+X D X S X 
+
+
+Timestep: 66
+Joint action taken: ('↓', 'interact') 	 Reward: 0 + shape * 0 
+X X ø=XdX 
+O     →oO 
+X ↓0    X 
+X D X S X 
+
+
+Timestep: 67
+Joint action taken: ('interact', 'stay') 	 Reward: 0 + shape * 0 
+X X ø=XdX 
+O     →oO 
+X ↓d    X 
+X D X S X 
+
+
+Timestep: 68
+Joint action taken: ('→', '↑') 	 Reward: 0 + shape * 0 
+X X ø=XdX 
+O     ↑oO 
+X   →d  X 
+X D X S X 
+
+
+Timestep: 69
+Joint action taken: ('stay', 'stay') 	 Reward: 0 + shape * 0 
+X X ø=XdX 
+O     ↑oO 
+X   →d  X 
+X D X S X 
+
+
+Timestep: 70
+Joint action taken: ('→', '←') 	 Reward: 0 + shape * 0 
+X X ø=XdX 
+O   ←o  O 
+X     →dX 
+X D X S X 
+
+
+Timestep: 71
+Joint action taken: ('interact', '↑') 	 Reward: 0 + shape * 0 
+X X ø=XdX 
+O   ↑o  O 
+X     →0Xd
+X D X S X 
+
+
+Timestep: 72
+Joint action taken: ('↑', '↑') 	 Reward: 0 + shape * 0 
+X X ø=XdX 
+O   ↑o↑0O 
+X       Xd
+X D X S X 
+
+
+Timestep: 73
+Joint action taken: ('interact', 'interact') 	 Reward: 0 + shape * 3 
+X X ø1X X 
+O   ↑1↑dO 
+X       Xd
+X D X S X 
+
+
+Timestep: 74
+Joint action taken: ('stay', '→') 	 Reward: 0 + shape * 0 
+X X ø2X X 
+O   →1↑dO 
+X       Xd
+X D X S X 
+
+
+Timestep: 75
+Joint action taken: ('←', 'stay') 	 Reward: 0 + shape * 0 
+X X ø3X X 
+O   →1←dO 
+X       Xd
+X D X S X 
+
+
+Timestep: 76
+Joint action taken: ('←', '←') 	 Reward: 0 + shape * 0 
+X X ø4X X 
+O ←1←d  O 
+X       Xd
+X D X S X 
+
+
+Timestep: 77
+Joint action taken: ('stay', 'stay') 	 Reward: 0 + shape * 0 
+X X ø5X X 
+O ←1←d  O 
+X       Xd
+X D X S X 
+
+
+Timestep: 78
+Joint action taken: ('↑', 'stay') 	 Reward: 0 + shape * 0 
+X X ø6X X 
+O ←1↑d  O 
+X       Xd
+X D X S X 
+
+
+Timestep: 79
+Joint action taken: ('stay', 'stay') 	 Reward: 0 + shape * 0 
+X X ø7X X 
+O ←1↑d  O 
+X       Xd
+X D X S X 
+
+
+Timestep: 80
+Joint action taken: ('↓', 'interact') 	 Reward: 0 + shape * 0 
+X X ø8X X 
+O ←o    O 
+X   ↓d  Xd
+X D X S X 
+
+
+Timestep: 81
+Joint action taken: ('↓', '→') 	 Reward: 0 + shape * 0 
+X X ø9X X 
+O   →o  O 
+X   ↓d  Xd
+X D X S X 
+
+
+Timestep: 82
+Joint action taken: ('↓', 'stay') 	 Reward: 0 + shape * 0 
+X X ø10X X 
+O   →o  O 
+X   ↓d  Xd
+X D X S X 
+
+
+Timestep: 83
+Joint action taken: ('→', 'stay') 	 Reward: 0 + shape * 0 
+X X ø11X X 
+O   →o  O 
+X     →dXd
+X D X S X 
+
+
+Timestep: 84
+Joint action taken: ('interact', '↑') 	 Reward: 0 + shape * 0 
+X X ø12X X 
+O   ↑o  O 
+X     →dXd
+X D X S X 
+
+
+Timestep: 85
+Joint action taken: ('↑', 'stay') 	 Reward: 0 + shape * 0 
+X X ø13X X 
+O   ↑o↑dO 
+X       Xd
+X D X S X 
+
+
+Timestep: 86
+Joint action taken: ('←', 'stay') 	 Reward: 0 + shape * 0 
+X X ø14X X 
+O   ↑o←dO 
+X       Xd
+X D X S X 
+
+
+Timestep: 87
+Joint action taken: ('stay', 'stay') 	 Reward: 0 + shape * 0 
+X X ø15X X 
+O   ↑o←dO 
+X       Xd
+X D X S X 
+
+
+Timestep: 88
+Joint action taken: ('stay', 'interact') 	 Reward: 0 + shape * 0 
+X X ø16X X 
+O   ↑o←dO 
+X       Xd
+X D X S X 
+
+
+Timestep: 89
+Joint action taken: ('↑', '↑') 	 Reward: 0 + shape * 0 
+X X ø17X X 
+O   ↑o↑dO 
+X       Xd
+X D X S X 
+
+
+Timestep: 90
+Joint action taken: ('stay', '→') 	 Reward: 0 + shape * 0 
+X X ø18X X 
+O   →o↑dO 
+X       Xd
+X D X S X 
+
+
+Timestep: 91
+Joint action taken: ('interact', '←') 	 Reward: 0 + shape * 0 
+X X ø19XdX 
+O ←o  ↑0O 
+X       Xd
+X D X S X 
+
+
+Timestep: 92
+Joint action taken: ('interact', 'stay') 	 Reward: 0 + shape * 0 
+X X ø20X X 
+O ←o  ↑dO 
+X       Xd
+X D X S X 
+
+
+Timestep: 93
+Joint action taken: ('→', 'stay') 	 Reward: 0 + shape * 0 
+X X ø20X X 
+O ←o  →dO 
+X       Xd
+X D X S X 
+
+
+Timestep: 94
+Joint action taken: ('→', 'stay') 	 Reward: 0 + shape * 0 
+X X ø20X X 
+O ←o  →dO 
+X       Xd
+X D X S X 
+
+
+Timestep: 95
+Joint action taken: ('←', 'interact') 	 Reward: 0 + shape * 0 
+X X ø20X X 
+O ←o←d  O 
+X       Xd
+X D X S X 
+
+
+Timestep: 96
+Joint action taken: ('interact', '→') 	 Reward: 0 + shape * 0 
+X X ø20X X 
+O →o←d  O 
+X       Xd
+X D X S X 
+
+
+Timestep: 97
+Joint action taken: ('stay', 'stay') 	 Reward: 0 + shape * 0 
+X X ø20X X 
+O →o←d  O 
+X       Xd
+X D X S X 
+
+
+Timestep: 98
+Joint action taken: ('stay', 'stay') 	 Reward: 0 + shape * 0 
+X X ø20X X 
+O →o←d  O 
+X       Xd
+X D X S X 
+
+
+Timestep: 99
+Joint action taken: ('→', 'stay') 	 Reward: 0 + shape * 0 
+X X ø20X X 
+O →o  →dO 
+X       Xd
+X D X S X 
+
+
+tot rew 20 tot rew shaped 37
+PPO agent on index 1:
+X X P X X 
+O     ↑1O 
+X ↑0    X 
+X D X S X 
+
+Timestep: 1
+Joint action taken: ('stay', '→') 	 Reward: 0 + shape * 0 
+X X P X X 
+O     →1O 
+X ↑0    X 
+X D X S X 
+
+
+Timestep: 2
+Joint action taken: ('stay', 'interact') 	 Reward: 0 + shape * 0 
+X X P X X 
+O     →oO 
+X ↑0    X 
+X D X S X 
+
+
+Timestep: 3
+Joint action taken: ('stay', 'interact') 	 Reward: 0 + shape * 0 
+X X P X X 
+O     →oO 
+X ↑0    X 
+X D X S X 
+
+
+Timestep: 4
+Joint action taken: ('stay', 'stay') 	 Reward: 0 + shape * 0 
+X X P X X 
+O     →oO 
+X ↑0    X 
+X D X S X 
+
+
+Timestep: 5
+Joint action taken: ('↑', '↓') 	 Reward: 0 + shape * 0 
+X X P X X 
+O ↑0    O 
+X     ↓oX 
+X D X S X 
+
+
+Timestep: 6
+Joint action taken: ('interact', 'interact') 	 Reward: 0 + shape * 0 
+X X P X X 
+O ↑0    O 
+X     ↓oX 
+X D X S X 
+
+
+Timestep: 7
+Joint action taken: ('stay', '↑') 	 Reward: 0 + shape * 0 
+X X P X X 
+O ↑0  ↑oO 
+X       X 
+X D X S X 
+
+
+Timestep: 8
+Joint action taken: ('←', '↑') 	 Reward: 0 + shape * 0 
+X X P X X 
+O ←0  ↑oO 
+X       X 
+X D X S X 
+
+
+Timestep: 9
+Joint action taken: ('↓', 'interact') 	 Reward: 0 + shape * 0 
+X X P XoX 
+O     ↑1O 
+X ↓0    X 
+X D X S X 
+
+
+Timestep: 10
+Joint action taken: ('stay', '↓') 	 Reward: 0 + shape * 0 
+X X P XoX 
+O       O 
+X ↓0  ↓1X 
+X D X S X 
+
+
+Timestep: 11
+Joint action taken: ('stay', 'interact') 	 Reward: 0 + shape * 0 
+X X P XoX 
+O       O 
+X ↓0  ↓1X 
+X D X S X 
+
+
+Timestep: 12
+Joint action taken: ('↑', 'stay') 	 Reward: 0 + shape * 0 
+X X P XoX 
+O ↑0    O 
+X     ↓1X 
+X D X S X 
+
+
+Timestep: 13
+Joint action taken: ('→', '↑') 	 Reward: 0 + shape * 0 
+X X P XoX 
+O   →0↑1O 
+X       X 
+X D X S X 
+
+
+Timestep: 14
+Joint action taken: ('←', 'stay') 	 Reward: 0 + shape * 0 
+X X P XoX 
+O ←0  ↑1O 
+X       X 
+X D X S X 
+
+
+Timestep: 15
+Joint action taken: ('interact', '←') 	 Reward: 0 + shape * 0 
+X X P XoX 
+O ←o←1  O 
+X       X 
+X D X S X 
+
+
+Timestep: 16
+Joint action taken: ('stay', 'interact') 	 Reward: 0 + shape * 0 
+X X P XoX 
+O ←o←1  O 
+X       X 
+X D X S X 
+
+
+Timestep: 17
+Joint action taken: ('stay', 'stay') 	 Reward: 0 + shape * 0 
+X X P XoX 
+O ←o←1  O 
+X       X 
+X D X S X 
+
+
+Timestep: 18
+Joint action taken: ('←', '↓') 	 Reward: 0 + shape * 0 
+X X P XoX 
+O ←o    O 
+X   ↓1  X 
+X D X S X 
+
+
+Timestep: 19
+Joint action taken: ('→', '↓') 	 Reward: 0 + shape * 0 
+X X P XoX 
+O   →o  O 
+X   ↓1  X 
+X D X S X 
+
+
+Timestep: 20
+Joint action taken: ('↑', 'stay') 	 Reward: 0 + shape * 0 
+X X P XoX 
+O   ↑o  O 
+X   ↓1  X 
+X D X S X 
+
+
+Timestep: 21
+Joint action taken: ('→', '→') 	 Reward: 0 + shape * 0 
+X X P XoX 
+O     →oO 
+X     →1X 
+X D X S X 
+
+
+Timestep: 22
+Joint action taken: ('stay', '↑') 	 Reward: 0 + shape * 0 
+X X P XoX 
+O     →oO 
+X     ↑1X 
+X D X S X 
+
+
+Timestep: 23
+Joint action taken: ('stay', '←') 	 Reward: 0 + shape * 0 
+X X P XoX 
+O     →oO 
+X   ←1  X 
+X D X S X 
+
+
+Timestep: 24
+Joint action taken: ('stay', '↑') 	 Reward: 0 + shape * 0 
+X X P XoX 
+O   ↑1→oO 
+X       X 
+X D X S X 
+
+
+Timestep: 25
+Joint action taken: ('interact', '→') 	 Reward: 0 + shape * 0 
+X X P XoX 
+O   →1→oO 
+X       X 
+X D X S X 
+
+
+Timestep: 26
+Joint action taken: ('↑', 'stay') 	 Reward: 0 + shape * 0 
+X X P XoX 
+O   →1↑oO 
+X       X 
+X D X S X 
+
+
+Timestep: 27
+Joint action taken: ('stay', 'stay') 	 Reward: 0 + shape * 0 
+X X P XoX 
+O   →1↑oO 
+X       X 
+X D X S X 
+
+
+Timestep: 28
+Joint action taken: ('→', 'stay') 	 Reward: 0 + shape * 0 
+X X P XoX 
+O   →1→oO 
+X       X 
+X D X S X 
+
+
+Timestep: 29
+Joint action taken: ('stay', '↑') 	 Reward: 0 + shape * 0 
+X X P XoX 
+O   ↑1→oO 
+X       X 
+X D X S X 
+
+
+Timestep: 30
+Joint action taken: ('stay', 'interact') 	 Reward: 0 + shape * 0 
+X X P XoX 
+O   ↑1→oO 
+X       X 
+X D X S X 
+
+
+Timestep: 31
+Joint action taken: ('stay', 'interact') 	 Reward: 0 + shape * 0 
+X X P XoX 
+O   ↑1→oO 
+X       X 
+X D X S X 
+
+
+Timestep: 32
+Joint action taken: ('←', 'interact') 	 Reward: 0 + shape * 0 
+X X P XoX 
+O   ↑1←oO 
+X       X 
+X D X S X 
+
+
+Timestep: 33
+Joint action taken: ('stay', '↑') 	 Reward: 0 + shape * 0 
+X X P XoX 
+O   ↑1←oO 
+X       X 
+X D X S X 
+
+
+Timestep: 34
+Joint action taken: ('stay', '←') 	 Reward: 0 + shape * 0 
+X X P XoX 
+O ←1  ←oO 
+X       X 
+X D X S X 
+
+
+Timestep: 35
+Joint action taken: ('stay', '→') 	 Reward: 0 + shape * 0 
+X X P XoX 
+O   →1←oO 
+X       X 
+X D X S X 
+
+
+Timestep: 36
+Joint action taken: ('←', '↓') 	 Reward: 0 + shape * 0 
+X X P XoX 
+O   ←o  O 
+X   ↓1  X 
+X D X S X 
+
+
+Timestep: 37
+Joint action taken: ('stay', '↓') 	 Reward: 0 + shape * 0 
+X X P XoX 
+O   ←o  O 
+X   ↓1  X 
+X D X S X 
+
+
+Timestep: 38
+Joint action taken: ('↑', '←') 	 Reward: 0 + shape * 0 
+X X P XoX 
+O   ↑o  O 
+X ←1    X 
+X D X S X 
+
+
+Timestep: 39
+Joint action taken: ('interact', '↑') 	 Reward: 0 + shape * 3 
+X X ø-XoX 
+O ↑1↑0  O 
+X       X 
+X D X S X 
+
+
+Timestep: 40
+Joint action taken: ('stay', '↓') 	 Reward: 0 + shape * 0 
+X X ø-XoX 
+O   ↑0  O 
+X ↓1    X 
+X D X S X 
+
+
+Timestep: 41
+Joint action taken: ('stay', '←') 	 Reward: 0 + shape * 0 
+X X ø-XoX 
+O   ↑0  O 
+X ←1    X 
+X D X S X 
+
+
+Timestep: 42
+Joint action taken: ('←', '↓') 	 Reward: 0 + shape * 0 
+X X ø-XoX 
+O ←0    O 
+X ↓1    X 
+X D X S X 
+
+
+Timestep: 43
+Joint action taken: ('interact', '←') 	 Reward: 0 + shape * 0 
+X X ø-XoX 
+O ←o    O 
+X ←1    X 
+X D X S X 
+
+
+Timestep: 44
+Joint action taken: ('interact', 'stay') 	 Reward: 0 + shape * 0 
+X X ø-XoX 
+O ←o    O 
+X ←1    X 
+X D X S X 
+
+
+Timestep: 45
+Joint action taken: ('stay', '→') 	 Reward: 0 + shape * 0 
+X X ø-XoX 
+O ←o    O 
+X   →1  X 
+X D X S X 
+
+
+Timestep: 46
+Joint action taken: ('→', 'interact') 	 Reward: 0 + shape * 0 
+X X ø-XoX 
+O   →o  O 
+X   →1  X 
+X D X S X 
+
+
+Timestep: 47
+Joint action taken: ('↑', 'stay') 	 Reward: 0 + shape * 0 
+X X ø-XoX 
+O   ↑o  O 
+X   →1  X 
+X D X S X 
+
+
+Timestep: 48
+Joint action taken: ('stay', '↑') 	 Reward: 0 + shape * 0 
+X X ø-XoX 
+O   ↑o  O 
+X   ↑1  X 
+X D X S X 
+
+
+Timestep: 49
+Joint action taken: ('stay', '←') 	 Reward: 0 + shape * 0 
+X X ø-XoX 
+O   ↑o  O 
+X ←1    X 
+X D X S X 
+
+
+Timestep: 50
+Joint action taken: ('stay', '↑') 	 Reward: 0 + shape * 0 
+X X ø-XoX 
+O ↑1↑o  O 
+X       X 
+X D X S X 
+
+
+Timestep: 51
+Joint action taken: ('interact', '↑') 	 Reward: 0 + shape * 3 
+X X ø=XoX 
+O ↑1↑0  O 
+X       X 
+X D X S X 
+
+
+Timestep: 52
+Joint action taken: ('→', '↑') 	 Reward: 0 + shape * 0 
+X X ø=XoX 
+O ↑1  →0O 
+X       X 
+X D X S X 
+
+
+Timestep: 53
+Joint action taken: ('↓', 'interact') 	 Reward: 0 + shape * 0 
+X X ø=XoX 
+O ↑1    O 
+X     ↓0X 
+X D X S X 
+
+
+Timestep: 54
+Joint action taken: ('stay', '↓') 	 Reward: 0 + shape * 0 
+X X ø=XoX 
+O       O 
+X ↓1  ↓0X 
+X D X S X 
+
+
+Timestep: 55
+Joint action taken: ('stay', '↓') 	 Reward: 0 + shape * 0 
+X X ø=XoX 
+O       O 
+X ↓1  ↓0X 
+X D X S X 
+
+
+Timestep: 56
+Joint action taken: ('stay', '←') 	 Reward: 0 + shape * 0 
+X X ø=XoX 
+O       O 
+X ←1  ↓0X 
+X D X S X 
+
+
+Timestep: 57
+Joint action taken: ('←', 'stay') 	 Reward: 0 + shape * 0 
+X X ø=XoX 
+O       O 
+X ←1←0  X 
+X D X S X 
+
+
+Timestep: 58
+Joint action taken: ('stay', 'interact') 	 Reward: 0 + shape * 0 
+X X ø=XoX 
+O       O 
+X ←1←0  X 
+X D X S X 
+
+
+Timestep: 59
+Joint action taken: ('stay', '↑') 	 Reward: 0 + shape * 0 
+X X ø=XoX 
+O ↑1    O 
+X   ←0  X 
+X D X S X 
+
+
+Timestep: 60
+Joint action taken: ('←', 'interact') 	 Reward: 0 + shape * 0 
+X X ø=XoX 
+O ↑1    O 
+X ←0    X 
+X D X S X 
+
+
+Timestep: 61
+Joint action taken: ('stay', 'interact') 	 Reward: 0 + shape * 0 
+X X ø=XoX 
+O ↑1    O 
+X ←0    X 
+X D X S X 
+
+
+Timestep: 62
+Joint action taken: ('interact', 'stay') 	 Reward: 0 + shape * 0 
+X X ø=XoX 
+O ↑1    O 
+X ←0    X 
+X D X S X 
+
+
+Timestep: 63
+Joint action taken: ('↓', 'stay') 	 Reward: 0 + shape * 0 
+X X ø=XoX 
+O ↑1    O 
+X ↓0    X 
+X D X S X 
+
+
+Timestep: 64
+Joint action taken: ('stay', '←') 	 Reward: 0 + shape * 0 
+X X ø=XoX 
+O ←1    O 
+X ↓0    X 
+X D X S X 
+
+
+Timestep: 65
+Joint action taken: ('stay', '↓') 	 Reward: 0 + shape * 0 
+X X ø=XoX 
+O ↓1    O 
+X ↓0    X 
+X D X S X 
+
+
+Timestep: 66
+Joint action taken: ('stay', '↓') 	 Reward: 0 + shape * 0 
+X X ø=XoX 
+O ↓1    O 
+X ↓0    X 
+X D X S X 
+
+
+Timestep: 67
+Joint action taken: ('→', 'interact') 	 Reward: 0 + shape * 0 
+X X ø=XoX 
+O ↓1    O 
+X   →0  X 
+X D X S X 
+
+
+Timestep: 68
+Joint action taken: ('stay', 'stay') 	 Reward: 0 + shape * 0 
+X X ø=XoX 
+O ↓1    O 
+X   →0  X 
+X D X S X 
+
+
+Timestep: 69
+Joint action taken: ('←', '↑') 	 Reward: 0 + shape * 0 
+X X ø=XoX 
+O ↑1    O 
+X ←0    X 
+X D X S X 
+
+
+Timestep: 70
+Joint action taken: ('↑', 'interact') 	 Reward: 0 + shape * 0 
+X X ø=XoX 
+O ↑1    O 
+X ↑0    X 
+X D X S X 
+
+
+Timestep: 71
+Joint action taken: ('stay', '→') 	 Reward: 0 + shape * 0 
+X X ø=XoX 
+O   →1  O 
+X ↑0    X 
+X D X S X 
+
+
+Timestep: 72
+Joint action taken: ('stay', '→') 	 Reward: 0 + shape * 0 
+X X ø=XoX 
+O     →1O 
+X ↑0    X 
+X D X S X 
+
+
+Timestep: 73
+Joint action taken: ('stay', 'stay') 	 Reward: 0 + shape * 0 
+X X ø=XoX 
+O     →1O 
+X ↑0    X 
+X D X S X 
+
+
+Timestep: 74
+Joint action taken: ('interact', '↑') 	 Reward: 0 + shape * 0 
+X X ø=XoX 
+O     ↑1O 
+X ↑0    X 
+X D X S X 
+
+
+Timestep: 75
+Joint action taken: ('←', '↑') 	 Reward: 0 + shape * 0 
+X X ø=XoX 
+O     ↑1O 
+X ←0    X 
+X D X S X 
+
+
+Timestep: 76
+Joint action taken: ('stay', '→') 	 Reward: 0 + shape * 0 
+X X ø=XoX 
+O     →1O 
+X ←0    X 
+X D X S X 
+
+
+Timestep: 77
+Joint action taken: ('↑', 'stay') 	 Reward: 0 + shape * 0 
+X X ø=XoX 
+O ↑0  →1O 
+X       X 
+X D X S X 
+
+
+Timestep: 78
+Joint action taken: ('stay', '↑') 	 Reward: 0 + shape * 0 
+X X ø=XoX 
+O ↑0  ↑1O 
+X       X 
+X D X S X 
+
+
+Timestep: 79
+Joint action taken: ('stay', '←') 	 Reward: 0 + shape * 0 
+X X ø=XoX 
+O ↑0←1  O 
+X       X 
+X D X S X 
+
+
+Timestep: 80
+Joint action taken: ('→', 'stay') 	 Reward: 0 + shape * 0 
+X X ø=XoX 
+O →0←1  O 
+X       X 
+X D X S X 
+
+
+Timestep: 81
+Joint action taken: ('stay', 'interact') 	 Reward: 0 + shape * 0 
+X X ø=XoX 
+O →0←1  O 
+X       X 
+X D X S X 
+
+
+Timestep: 82
+Joint action taken: ('stay', 'interact') 	 Reward: 0 + shape * 0 
+X X ø=XoX 
+O →0←1  O 
+X       X 
+X D X S X 
+
+
+Timestep: 83
+Joint action taken: ('→', 'interact') 	 Reward: 0 + shape * 0 
+X X ø=XoX 
+O →0←1  O 
+X       X 
+X D X S X 
+
+
+Timestep: 84
+Joint action taken: ('interact', '→') 	 Reward: 0 + shape * 0 
+X X ø=XoX 
+O →0  →1O 
+X       X 
+X D X S X 
+
+
+Timestep: 85
+Joint action taken: ('↓', 'interact') 	 Reward: 0 + shape * 0 
+X X ø=XoX 
+O     →oO 
+X ↓0    X 
+X D X S X 
+
+
+Timestep: 86
+Joint action taken: ('stay', 'stay') 	 Reward: 0 + shape * 0 
+X X ø=XoX 
+O     →oO 
+X ↓0    X 
+X D X S X 
+
+
+Timestep: 87
+Joint action taken: ('stay', '↑') 	 Reward: 0 + shape * 0 
+X X ø=XoX 
+O     ↑oO 
+X ↓0    X 
+X D X S X 
+
+
+Timestep: 88
+Joint action taken: ('stay', 'stay') 	 Reward: 0 + shape * 0 
+X X ø=XoX 
+O     ↑oO 
+X ↓0    X 
+X D X S X 
+
+
+Timestep: 89
+Joint action taken: ('interact', '↑') 	 Reward: 0 + shape * 3 
+X X ø=XoX 
+O     ↑oO 
+X ↓d    X 
+X D X S X 
+
+
+Timestep: 90
+Joint action taken: ('→', '←') 	 Reward: 0 + shape * 0 
+X X ø=XoX 
+O   ←o  O 
+X   →d  X 
+X D X S X 
+
+
+Timestep: 91
+Joint action taken: ('stay', '→') 	 Reward: 0 + shape * 0 
+X X ø=XoX 
+O     →oO 
+X   →d  X 
+X D X S X 
+
+
+Timestep: 92
+Joint action taken: ('stay', 'interact') 	 Reward: 0 + shape * 0 
+X X ø=XoX 
+O     →oO 
+X   →d  X 
+X D X S X 
+
+
+Timestep: 93
+Joint action taken: ('stay', '→') 	 Reward: 0 + shape * 0 
+X X ø=XoX 
+O     →oO 
+X   →d  X 
+X D X S X 
+
+
+Timestep: 94
+Joint action taken: ('↑', '→') 	 Reward: 0 + shape * 0 
+X X ø=XoX 
+O   ↑d→oO 
+X       X 
+X D X S X 
+
+
+Timestep: 95
+Joint action taken: ('stay', '→') 	 Reward: 0 + shape * 0 
+X X ø=XoX 
+O   ↑d→oO 
+X       X 
+X D X S X 
+
+
+Timestep: 96
+Joint action taken: ('stay', 'interact') 	 Reward: 0 + shape * 0 
+X X ø=XoX 
+O   ↑d→oO 
+X       X 
+X D X S X 
+
+
+Timestep: 97
+Joint action taken: ('stay', '←') 	 Reward: 0 + shape * 0 
+X X ø=XoX 
+O   ↑d←oO 
+X       X 
+X D X S X 
+
+
+Timestep: 98
+Joint action taken: ('interact', 'interact') 	 Reward: 0 + shape * 0 
+X X ø=XoX 
+O   ↑d←oO 
+X       X 
+X D X S X 
+
+
+Timestep: 99
+Joint action taken: ('↓', '↓') 	 Reward: 0 + shape * 0 
+X X ø=XoX 
+O       O 
+X   ↓d↓oX 
+X D X S X 
+
+

@@ -1,4 +1,4 @@
-import gym, time, os, seaborn
+import gym, time, os, seaborn, random
 import numpy as np
 import tensorflow as tf
 import matplotlib.pyplot as plt
@@ -8,19 +8,19 @@ from sacred import Experiment
 from sacred.observers import FileStorageObserver
 from tensorflow.saved_model import simple_save
 
-PPO_DATA_DIR = 'data/ppo_runs/'
+PPO_DATA_DIR = '../../thesis_data/dr_ppo/'
 
 ex = Experiment('PPO')
 ex.observers.append(FileStorageObserver.create(PPO_DATA_DIR + 'ppo_exp'))
 
-from overcooked_ai_py.utils import load_pickle, save_pickle, load_dict_from_file, profile
+from overcooked_ai_py.utils import load_pickle, load_pkl, save_pickle, load_dict_from_file, profile
 from overcooked_ai_py.agents.agent import RandomAgent, GreedyHumanModel, AgentPair
 from overcooked_ai_py.agents.benchmarking import AgentEvaluator
 from overcooked_ai_py.planning.planners import NO_COUNTERS_PARAMS, MediumLevelPlanner
 from overcooked_ai_py.mdp.overcooked_env import OvercookedEnv
 from overcooked_ai_py.mdp.overcooked_mdp import OvercookedGridworld
 
-from human_aware_rl.baselines_utils import get_vectorized_gym_env, create_model, update_model, save_baselines_model, load_baselines_model, get_agent_from_saved_model
+from human_aware_rl.baselines_utils import get_vectorized_gym_env, create_model, update_model, save_baselines_model, load_baselines_model, get_agent_from_saved_model, overwrite_model, overwrite_variables
 from human_aware_rl.utils import create_dir_if_not_exists, reset_tf, delete_dir_if_exists, set_global_seed
 from human_aware_rl.imitation.behavioural_cloning import get_bc_agent_from_saved, DEFAULT_ENV_PARAMS, BC_SAVE_DIR
 from human_aware_rl.experiments.bc_experiments import BEST_BC_MODELS_PATH
@@ -29,13 +29,13 @@ from human_aware_rl.experiments.bc_experiments import BEST_BC_MODELS_PATH
 # PARAMS
 @ex.config
 def my_config():
-    
+
     ##################
     # GENERAL PARAMS #
     ##################
 
     TIMESTAMP_DIR = True
-    EX_NAME = "ppo_bc_train_simple"
+    EX_NAME = "ppo_bc_train_simple_jason"
 
     if TIMESTAMP_DIR:
         SAVE_DIR = PPO_DATA_DIR + time.strftime('%Y_%m_%d-%H_%M_%S_') + EX_NAME + "/"
@@ -70,6 +70,11 @@ def my_config():
     # Every `VIZ_FREQUENCY` gradient steps, display the first 100 steps of a rollout of the agents
     VIZ_FREQUENCY = 50 if not LOCAL_TESTING else 10
 
+    ##################
+    # META PARAMS #
+    ##################
+    NUM_AGENTS = 10
+
     ##############
     # PPO PARAMS #
     ##############
@@ -81,13 +86,17 @@ def my_config():
     # for one set of gradient updates. Is divided equally across environments
     TOTAL_BATCH_SIZE = 12000 if not LOCAL_TESTING else 800
 
+    # PPO_RUN_TOT_TIMESTEPS = PPO_RUN_TOT_TIMESTEPS // META_FACTOR
+    # TOTAL_BATCH_SIZE = TOTAL_BATCH_SIZE // META_FACTOR
+
     # Number of minibatches we divide up each batch into before
     # performing gradient steps
     MINIBATCHES = 6 if not LOCAL_TESTING else 1
 
     # Calculating `batch size` as defined in baselines
     BATCH_SIZE = TOTAL_BATCH_SIZE // sim_threads
-
+    # This is nsteps what the heck is going on
+    # Compare the two
     # Number of gradient steps to perform on each mini-batch
     STEPS_PER_UPDATE = 8 if not LOCAL_TESTING else 1
 
@@ -95,7 +104,7 @@ def my_config():
     LR = 1e-3
 
     # Factor by which to reduce learning rate over training
-    LR_ANNEALING = 1 
+    LR_ANNEALING = 1
 
     # Entropy bonus coefficient
     ENTROPY = 0.1
@@ -120,12 +129,13 @@ def my_config():
     SELF_PLAY_HORIZON = None
 
     # 0 is default value that does no annealing
-    REW_SHAPING_HORIZON = 0 
+    REW_SHAPING_HORIZON = 0
 
     # Whether mixing of self play policies
     # happens on a trajectory or on a single-timestep level
     # Recommended to keep to true
     TRAJECTORY_SELF_PLAY = True
+
 
 
     ##################
@@ -158,7 +168,7 @@ def my_config():
         "POT_DISTANCE_REW": 0,
         "SOUP_DISTANCE_REW": 0,
     }
-    
+
     # Env params
     horizon = 400
 
@@ -181,6 +191,7 @@ def my_config():
         "EX_NAME": EX_NAME,
         "SAVE_DIR": SAVE_DIR,
         "GPU_ID": GPU_ID,
+        "NUM_AGENTS": NUM_AGENTS,
         "PPO_RUN_TOT_TIMESTEPS": PPO_RUN_TOT_TIMESTEPS,
         "mdp_params": {
             "layout_name": layout_name,
@@ -196,6 +207,8 @@ def my_config():
         "sim_threads": sim_threads,
         "TOTAL_BATCH_SIZE": TOTAL_BATCH_SIZE,
         "BATCH_SIZE": BATCH_SIZE,
+        # "NUM_META_ITERATIONS": NUM_META_ITERATIONS,
+        # "META_BATCH_SIZE": META_BATCH_SIZE,
         "MAX_GRAD_NORM": MAX_GRAD_NORM,
         "LR": LR,
         "LR_ANNEALING": LR_ANNEALING,
@@ -226,61 +239,20 @@ def save_ppo_model(model, save_folder):
         save_folder,
         inputs={"obs": model.act_model.X},
         outputs={
-            "action": model.act_model.action, 
+            "action": model.act_model.action,
             "value": model.act_model.vf,
             "action_probs": model.act_model.action_probs
         }
     )
 
-def configure_other_agent(params, gym_env, mlp, mdp):
-    '''
-    For BC, it configures the best BC agent.
-    '''
-    if params["OTHER_AGENT_TYPE"] == "hm":
-        hl_br, hl_temp, ll_br, ll_temp = params["HM_PARAMS"]
-        agent = GreedyHumanModel(mlp, hl_boltzmann_rational=hl_br, hl_temp=hl_temp, ll_boltzmann_rational=ll_br, ll_temp=ll_temp)
-        gym_env.use_action_method = True
 
-    elif params["OTHER_AGENT_TYPE"][:2] == "bc":
-        best_bc_model_paths = load_pickle(BEST_BC_MODELS_PATH)
-        if params["OTHER_AGENT_TYPE"] == "bc_train":
-            bc_model_path = best_bc_model_paths["train"][mdp.layout_name]
-        elif params["OTHER_AGENT_TYPE"] == "bc_test":
-            bc_model_path = best_bc_model_paths["test"][mdp.layout_name]
-        else:
-            raise ValueError("Other agent type must be bc train or bc test")
-
-        print("LOADING BC MODEL FROM: {}".format(bc_model_path))
-        agent, bc_params = get_bc_agent_from_saved(BC_SAVE_DIR, bc_model_path)
-        gym_env.use_action_method = True
-        # Make sure environment params are the same in PPO as in the BC model
-        for k, v in bc_params["env_params"].items():
-            assert v == params["env_params"][k], "{} did not match. env_params: {} \t PPO params: {}".format(k, v, params[k])
-        for k, v in bc_params["mdp_params"].items():
-            assert v == params["mdp_params"][k], "{} did not match. mdp_params: {} \t PPO params: {}".format(k, v, params[k])
-
-    elif params["OTHER_AGENT_TYPE"] == "rnd":
-        agent = RandomAgent()
-
-    elif params["OTHER_AGENT_TYPE"] == "sp":
-        gym_env.self_play_randomization = 1
-
-    else:
-        raise ValueError("unknown type of agent to match with")
-        
-    if not params["OTHER_AGENT_TYPE"] == "sp":
-        assert mlp.mdp == mdp
-        agent.set_mdp(mdp)
-        gym_env.other_agent = agent
-
-
-def configure_bc_agent(bc_model_path, gym_env, mlp, mdp):
+def configure_bc_agent(bc_save_dir, bc_model_path, gym_env, mlp, mdp):
     '''
     Configure the BC agent from its model path
     '''
 
     print("LOADING BC MODEL FROM: {}".format(bc_model_path))
-    agent, bc_params = get_bc_agent_from_saved(bc_model_path)
+    agent, bc_params = get_bc_agent_from_saved(bc_save_dir, bc_model_path)
     gym_env.use_action_method = True
     assert mlp.mdp == mdp
     agent.set_mdp(mdp)
@@ -289,7 +261,6 @@ def configure_bc_agent(bc_model_path, gym_env, mlp, mdp):
 
 def load_training_data(run_name, seeds=None):
     run_dir = PPO_DATA_DIR + run_name + "/"
-    run_dir = run_name + "/"
     config = load_pickle(run_dir + "config")
 
     # To add backwards compatibility
@@ -329,15 +300,15 @@ def plot_ppo_run(name, sparse=False, limit=None, print_config=False, seeds=None,
 
     # load all training data from an environment
     train_infos, config = load_training_data(name, seeds)
-    
+
     if print_config:
         print(config)
-    
+
     if limit is None:
         limit = config["PPO_RUN_TOT_TIMESTEPS"]
-    
+
     num_datapoints = len(train_infos[0]['eprewmean'])
-    
+
     prop_data = limit / config["PPO_RUN_TOT_TIMESTEPS"]
     ciel_data_idx = int(num_datapoints * prop_data)
 
@@ -350,9 +321,29 @@ def plot_ppo_run(name, sparse=False, limit=None, print_config=False, seeds=None,
     if not single:
         seaborn.tsplot(time=info['xs'], data=datas)
     plt.ticklabel_format(style='sci', axis='x', scilimits=(0,0))
-    
+
     if single:
         plt.legend()
+
+
+PYTHON_LAYOUT_NAME_TO_JS_NAME = {
+    "unident_s": "asymmetric_advantages",
+    "simple": "cramped_room",
+    "random1": "coordination_ring",
+    "random0": "random0",
+    "random3": "random3"
+}
+
+JS_LAYOUT_NAME_TO_PYTHON_NAME = {v:k for k, v in PYTHON_LAYOUT_NAME_TO_JS_NAME.items()}
+
+
+def load_workers(layout_name, type='train'):
+    if type != 'train' and type!= 'test':
+        raise ValueError("Invalid Human Data Type!")
+    clean_trials = load_pkl('thesis_data/human/anonymized/clean_{}_trials.pkl'.format(type))
+    current_clean_trials = clean_trials[clean_trials['layout_name'] == PYTHON_LAYOUT_NAME_TO_JS_NAME[layout_name]]
+    workers = list(current_clean_trials['workerid_num'].unique())
+    return workers
 
 @ex.automain
 # @profile
@@ -378,38 +369,54 @@ def ppo_run(params):
 
         print("Creating env with params", params)
         # Configure mdp
-        
+
         mdp = OvercookedGridworld.from_layout_name(**params["mdp_params"])
         env = OvercookedEnv(mdp, **params["env_params"])
-        mlp = MediumLevelPlanner.from_pickle_or_compute(mdp, NO_COUNTERS_PARAMS, force_compute=True) 
+        mlp = MediumLevelPlanner.from_pickle_or_compute(mdp, NO_COUNTERS_PARAMS, force_compute=True)
 
         # Configure gym env
         gym_env = get_vectorized_gym_env(
             env, 'Overcooked-v0', featurize_fn=lambda x: mdp.lossless_state_encoding(x), **params
         )
         gym_env.self_play_randomization = 0 if params["SELF_PLAY_HORIZON"] is None else 1 # 1
-        gym_env.self_play_randomization = 1 
+        gym_env.self_play_randomization = 1
         gym_env.trajectory_sp = params["TRAJECTORY_SELF_PLAY"] # True
         gym_env.update_reward_shaping_param(1 if params["mdp_params"]["rew_shaping_params"] != 0 else 0) # 1
 
         print("self_play_randomization: {}".format(gym_env.self_play_randomization))
         print("trajectory_sp: {}".format(gym_env.trajectory_sp))
-        configure_other_agent(params, gym_env, mlp, mdp)
 
-        # Create model
+        layout_name = params["mdp_params"]["layout_name"]
+
+        bc_path = 'thesis_data/bc_runs/' + layout_name + '/' + 'bc_train' + '/'
+        train_workers = load_workers(layout_name, "train")
+        bc_agents = ['seed{}/worker{}'.format(i,j) for i in range(5) for j in train_workers]
+        num_train_agents = len(bc_agents)
+
+        # dummy agent to configure the environment
+        bc_agent = bc_agents[0]
+        configure_bc_agent(bc_path, bc_agent, gym_env, mlp, mdp)
+
+        # Create meta model
         with tf.device('/device:GPU:{}'.format(params["GPU_ID"])):
-            model = create_model(gym_env, "ppo_agent", **params)
+            meta_model = create_model(gym_env, "ppo_agent", **params)
 
-        print("start updating!")
-
-        # Train model
         params["CURR_SEED"] = seed
-        train_info = update_model(gym_env, model, **params)
-        
+
+        num_agents = params["NUM_AGENTS"]
+        sampled_agent_indices = random.sample(range(0, num_train_agents), num_agents)
+        params["PPO_RUN_TOT_TIMESTEPS"] = params["PPO_RUN_TOT_TIMESTEPS"]/num_agents
+        for index in sampled_agent_indices:
+
+            current_agent = bc_agents[index]
+            configure_bc_agent(bc_path, current_agent, gym_env, mlp, mdp)
+            train_info = update_model(gym_env, meta_model, **params)
+
+
         # Save model
-        save_ppo_model(model, curr_seed_dir + model.agent_name)
+        save_ppo_model(meta_model, curr_seed_dir + meta_model.agent_name)
         print("Saved training info at", curr_seed_dir + "training_info")
         save_pickle(train_info, curr_seed_dir + "training_info")
         train_infos.append(train_info)
-    
+
     return train_infos
